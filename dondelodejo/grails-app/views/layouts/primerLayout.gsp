@@ -16,11 +16,11 @@
 
 <%--Theme SIMPLEX, sobreescribe al bootstrap.css básico del plugin--%>
 <link rel="stylesheet" type="text/css"
-	href="/dondelodejo.com/css/bootstrap-simplex.css">
+	href="/dondelodejo/css/bootstrap-simplex.css">
 
 <%--Modificaciones al theme SIMPLEX, en otro archivo para no romper nada--%>
 <link rel="stylesheet" type="text/css"
-	href="/dondelodejo.com/css/bootstrap-simplex_MODS.css">
+	href="/dondelodejo/css/bootstrap-simplex_MODS.css">
 
 <g:layoutHead />
 </head>
@@ -120,7 +120,7 @@
 		<g:message code="spinner.alt" default="Loading&hellip;" />
 	</div>
 	<g:javascript library="application" />
-	<r:layoutResources />
+<%--	<r:layoutResources />--%>
 	</div>
 </body>
 </html>
