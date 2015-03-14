@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="layout" content="primerLayout" />
+<title>Reservar</title>
+</head>
+
+<body>
+	<%--
+	<div id="page-body" role="main">
+		<center>
+			<g:form class="formulario" action="alta">
+				<div class="background" />
+				<g:textField style="display:none" name="estacionamientoId"
+					value="${estacionamientoId}" />
+				<div>
+					<label for="horaDeInicio">Fecha de Inicio:</label>
+					<g:datePicker name="horaDeInicio"
+						value="${reservaFiltro?.horaDeInicio}" precision="minute"
+						years="[2014,2015]" />
+
+					<!--<g:textField name="horaDeInicio" value="${reservaFiltro?.horaDeInicio}"/>-->
+				</div>
+				<div>
+					<label for="horasReservadas">Horas que quiere reservar:</label>
+					<g:textField name="horasReservadas"
+						value="${reservaFiltro?.horasReservadas}" />
+				</div>
+				<div id="submit">
+					<g:submitButton name="crear" value="Crear la Reserva" />
+				</div>
+			</g:form>
+		</center>
+	</div>
+
+	<table border=1>
+		<tr>
+			<td width="80%" colspan="2">Reservas:</td>
+		</tr>
+		<g:each in="${listadoReservas}" var="r">
+			<tr>
+				<td>Fecha: ${r.horaDeInicio}<br /> horasReservadas:${r.horasReservadas}<br />
+					estado:${r.estado}<br />
+				</td>
+
+				<td><g:link controller="reserva" action="borrar" id="${r.id}">Eliminar</g:link><br />
+				</td>
+
+			</tr>
+		</g:each>
+	</table>
+	--%>
+
+	<div id="page-body" role="main">
+		<center>
+			<g:form class="formulario" action="alta">
+				<div class="background" />
+				<g:textField style="display:none" name="estacionamientoId"
+					value="${estacionamientoId}" />
+				<div>
+					<label for="horaDeInicio">Fecha de Inicio:</label>
+					<g:datePicker name="horaDeInicio"
+						value="${reservaFiltro?.horaDeInicio}" precision="minute"
+						years="[2014,2015]" />
+
+					<!--<g:textField name="horaDeInicio" value="${reservaFiltro?.horaDeInicio}"/>-->
+				</div>
+				<div>
+					<label for="horasReservadas">Horas que quiere reservar:</label>
+					<g:textField name="horasReservadas"
+						value="${reservaFiltro?.horasReservadas}" />
+				</div>
+				<div id="submit">
+					<g:submitButton name="crear" value="Crear la Reserva" />
+				</div>
+			</g:form>
+		</center>
+	</div>
+
+	<legend>Historial de reservas</legend>
+
+	<table class="table table-striped table-hover table-clickable">
+		<thead>
+			<tr>
+				<th>Fecha</th>
+				<th>Duración</th>
+				<th colspan="2">Estado</th>
+			</tr>
+		</thead>
+		<g:each in="${listadoReservas}" var="r">
+			<tr>
+				<td>
+					${r.horaDeInicio}
+				</td>
+				<td>
+					${r.horasReservadas}
+				</td>
+				<td>
+					${r.estado}
+				</td>
+				<%--				<td><g:link controller="calificacion" action="borrar"--%>
+				<%--						id="${r.id}">Eliminar</g:link><br /></td>--%>
+				<td><g:link controller="reserva" action="crearCalificacion"
+						id="${r.id}">Calificar</g:link></td>
+			</tr>
+		</g:each>
+	</table>
+
+</body>
+</html>
