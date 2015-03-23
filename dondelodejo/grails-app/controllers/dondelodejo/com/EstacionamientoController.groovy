@@ -126,10 +126,11 @@ class EstacionamientoController {
 		else{//es una busqueda
 			Integer metros = Integer.valueOf(params["metros"])
 
-			def algo = clienteService.buscarPorDistancia(params.get("direccion"),params.get("localidad"),params.get("pais"),metros)
+			List<Estacionamiento> algo = clienteService.buscarPorDistancia(params.get("direccion"),params.get("localidad"),params.get("pais"),metros)
 
 			render view:"listadoPorDistancia",
-			model:[resultados: algo
+			model:[estacionamientoInstanciaListado: algo
+				,estacionamientoInstanciaTotal: algo.size()
 				,metros:metros
 				,direccion:params.get("direccion")]
 		}

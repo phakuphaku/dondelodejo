@@ -37,7 +37,7 @@ class ClienteService {
 		Estacionamiento.findAll(
 				"from Estacionamiento as e "+
 				"where (e.ubicacion.direccionX between ? AND ? ) "+
-				"AND (e.ubicacion.direccionY between ? AND ?) ",
+				"AND (e.ubicacion.direccionY between ? AND ?) order by puntaje desc",
 				[
 					desdeX,
 					hastaX,

@@ -80,7 +80,9 @@ class EstacionamientoService {
 	}
 
 	def listado(Map map) {
-		Estacionamiento.list(map) // .sort([puntaje:"asc"])
+		map.putAt("sort","puntaje")
+		map.putAt("order","DESC")
+		Estacionamiento.list(map)
 	}
 	/** Verifica si es un estacionamiento válido */
 	def validar(Estacionamiento e){
