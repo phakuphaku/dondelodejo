@@ -7,7 +7,7 @@
 </head>
 <body>
 	<div id="page-body" role="main">
-		<span>Ud es un administrador</span> <a href="../listado">volver al
+		<span>Ud es un administrador</span> <a href="<g:message code="default.link.listado" default="/dondelodejo/estacionamiento/listado"/>">volver al
 			listado</a>
 	</div>
 </body>

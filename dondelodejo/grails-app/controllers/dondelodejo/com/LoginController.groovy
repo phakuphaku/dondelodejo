@@ -32,11 +32,11 @@ class LoginController {
 		Long homeId=null
 		if (usuario.esAdministrador()) {
 			home="administrador";
-			homeId=usuario.estacionamiento.id
+//			homeId=usuario.estacionamiento.id
 		}
 		if (usuario.esOperador()) {
 			home="operador";
-			homeId=usuario.estacionamiento.id
+//			homeId=usuario.estacionamiento.id
 		}
 		if (usuario.esCliente()) {home="cliente"}
 

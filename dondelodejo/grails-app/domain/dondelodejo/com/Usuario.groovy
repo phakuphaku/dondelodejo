@@ -21,8 +21,8 @@ class Usuario {
 	String contrasenia
 	String tipoUsuario
 
-	Estacionamiento estacionamiento
-	static hasMany = [tarjetas:Tarjeta,reservas:Reserva]
+//	Estacionamiento estacionacmiento
+	static hasMany = [reservas:Reserva]
 
 	static constraints = {
 		nombre		nullable:false,blank:false
@@ -34,7 +34,7 @@ class Usuario {
 			getOperador(),
 			getCliente()
 		],defaultValue:this.getCliente()
-		estacionamiento nullable:true
+//		estacionamiento nullable:true
 	}
 
 	def esAdministrador(){

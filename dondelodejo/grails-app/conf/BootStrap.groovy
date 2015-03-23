@@ -1,8 +1,8 @@
 import java.util.Date;
 
+import dondelodejo.com.CalificacionNueva
 import dondelodejo.com.Cochera
 import dondelodejo.com.Estacionamiento
-import dondelodejo.com.Tarjeta
 import dondelodejo.com.Ubicacion
 import dondelodejo.com.Usuario
 import dondelodejo.com.Reserva
@@ -11,168 +11,210 @@ import dondelodejo.com.Calificacion
 class BootStrap {
 	def usuarioService
 
-	def init = { servletContext ->
-
-		Ubicacion ubicacion1 = new Ubicacion(
-				direccionStr:"Rivadavia 502",
-				direccionX:-34.6080344,
-				direccionY:-58.3733686,
-				barrio:"Balvanera",
-				localidad:"Capital Federal",
-				provincia:"Capital Federal",
-				pais:"Argentina");
-
-		Ubicacion ubicacion2 = new Ubicacion(
-				direccionStr:"Boedo 679",
-				direccionX:-34.6211227,
-				direccionY:-58.2054511,
-				barrio:"Almagro",
-				localidad:"Capital Federal",
-				provincia:"Capital Federal",
-				pais:"Argentina");
-
-		Ubicacion ubicacion3 = new Ubicacion(
-				direccionStr:"Libertad 1234",
-				direccionX:-34.5938873,
-				direccionY:-58.3844316,
-				barrio:"Microcentro",
-				localidad:"Capital Federal",
-				provincia:"Capital Federal",
-				pais:"Argentina");
-
-		Tarjeta tarjeta1 = new Tarjeta(
-				numero:"0000111100002222",
-				vencimiento:"2015/01/01",
-				nombreTitular: "Pablo Cosso",
-				clave:123,
-				domicilioFacturacion:"Paseo Colon 850");
-
+	def init = {
+		servletContext ->
 		Integer numCocheras = 25
 
-		//
-		//	Estacionamiento 1 / 3
-		//
+		Ubicacion ubicacion1 = new Ubicacion(
+		direccionStr:"Rivadavia 502",
+		direccionX:-34.6080344,
+		direccionY:-58.3733686,
+		barrio:"Balvanera",
+		localidad:"Capital Federal",
+		provincia:"Capital Federal",
+		pais:"Argentina");
 		Estacionamiento estacionamiento1 = new Estacionamiento(
-				nombre:'Primer Garage',
-				descripcion:"Una linda esquina",
-				fechaAlta:new Date(),
-				numCocheras:numCocheras,
-				puntaje:5,
-				ubicacion:ubicacion1)
+		nombre:'Primer Garage',
+		descripcion:"Una linda esquina",
+		fechaAlta:new Date(),
+		numCocheras:numCocheras,
+		puntaje:5,
+		ubicacion:ubicacion1
+		).save()
 
 		Cochera cochera1
 		for ( i in 1..numCocheras) {
-			cochera1 = new Cochera(numero:i,
+			cochera1 = new Cochera(
+			numero:i,
 			estado:Cochera.estadoLibre(),
 			precioCocheraHora:20,
 			precioCocheraFraccion:4
 			)
 			estacionamiento1.addToCocheras(cochera1);
-			estacionamiento1.save()
 		}
-		estacionamiento1.save(flush: true)
 
-		//
-		// Estacionamiento 2 / 3
-		//
+
+		Ubicacion ubicacion2 = new Ubicacion(
+		direccionStr:"Boedo 679",
+		direccionX:-34.6211227,
+		direccionY:-58.2054511,
+		barrio:"Almagro",
+		localidad:"Capital Federal",
+		provincia:"Capital Federal",
+		pais:"Argentina");
+
 		Estacionamiento estacionamiento2 = new Estacionamiento(
-				nombre:'Segundo Garage',
-				descripcion:"Donde estacionas de todo",
-				fechaAlta:new Date(),
-				numCocheras:numCocheras,
-				puntaje:3,
-				ubicacion:ubicacion2)
+		nombre:'Segundo Garage',
+		descripcion:"Donde estacionas de todo",
+		fechaAlta:new Date(),
+		numCocheras:numCocheras,
+		puntaje:3,
+		ubicacion:ubicacion2).save()
 
 		Cochera cochera2
 		for ( i in 1..numCocheras) {
-			cochera2 = new Cochera(numero:i,
+			cochera2 = new Cochera(
+			numero:i,
 			estado:Cochera.estadoLibre(),
 			precioCocheraHora:28,
 			precioCocheraFraccion:7
 			)
 			estacionamiento2.addToCocheras(cochera2);
-			estacionamiento2.save()
 		}
-		estacionamiento2.save(flush: true)
 
-		//
-		// Estacionamiento 3 / 3
-		//
+
+
+
+
+		Ubicacion ubicacion3 = new Ubicacion(
+		direccionStr:"Libertad 1234",
+		direccionX:-34.5938873,
+		direccionY:-58.3844316,
+		barrio:"Microcentro",
+		localidad:"Capital Federal",
+		provincia:"Capital Federal",
+		pais:"Argentina");
+
 		Estacionamiento estacionamiento3 = new Estacionamiento(
-				nombre:'Tercer Garage',
-				descripcion:"En pleno centro",
-				fechaAlta:new Date(),
-				numCocheras:numCocheras,
-				puntaje:0,
-				ubicacion:ubicacion3)
+		nombre:'Tercer Garage',
+		descripcion:"En pleno centro",
+		fechaAlta:new Date(),
+		numCocheras:numCocheras,
+		puntaje:0,
+		ubicacion:ubicacion3
+		).save()
 
 		Cochera cochera3
 		for ( i in 1..numCocheras) {
-			cochera3 = new Cochera(numero:i,
+			cochera3 = new Cochera(
+			numero:i,
 			estado:Cochera.estadoLibre(),
 			precioCocheraHora:36,
 			precioCocheraFraccion:9
 			)
 			estacionamiento3.addToCocheras(cochera3);
-			estacionamiento3.save()
 		}
-		estacionamiento3.save(flush: true)
+
+		numCocheras = 1
+		
+		Ubicacion ubicacion4 = new Ubicacion(direccionStr:"Rivadavia 502",direccionX:-34.608036,direccionY:-58.373367,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
+		Estacionamiento estacionamiento4 = new Estacionamiento(nombre:'Primer Garage',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
+		ubicacion:ubicacion4).save()
+		estacionamiento4.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
+		Ubicacion ubicacion5 = new Ubicacion(direccionStr:"Boedo 679",direccionX:-34.621124,direccionY:-58.205452,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
+		Estacionamiento estacionamiento5 = new Estacionamiento(nombre:'Segundo Garage',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
+		ubicacion:ubicacion5).save()
+		estacionamiento5.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
+		Ubicacion ubicacion6 = new Ubicacion(direccionStr:"Libertad 1234",direccionX:-34.593887,direccionY:-58.38443,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
+		Estacionamiento estacionamiento6 = new Estacionamiento(nombre:'Tercer Garage',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
+		ubicacion:ubicacion6).save()
+		estacionamiento6.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
+		Ubicacion ubicacion7 = new Ubicacion(direccionStr:"Adolfo Alsina 2551",direccionX:-34.612244,direccionY:-58.402435,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
+		Estacionamiento estacionamiento7 = new Estacionamiento(nombre:'A y M',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
+		ubicacion:ubicacion7).save()
+		estacionamiento7.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
+		Ubicacion ubicacion8 = new Ubicacion(direccionStr:"Sarmiento 2265",direccionX:-34.60604,direccionY:-58.39886,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
+		Estacionamiento estacionamiento71 = new Estacionamiento(nombre:'PRESLY',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
+		ubicacion:ubicacion8).save()
+		estacionamiento71.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
+		Ubicacion ubicacion9 = new Ubicacion(direccionStr:"Larrea 257",direccionX:-34.606785,direccionY:-58.402,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
+		Estacionamiento estacionamiento8 = new Estacionamiento(nombre:'Edifa',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
+		ubicacion:ubicacion9).save()
+		estacionamiento8.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
+		Ubicacion ubicacion40 = new Ubicacion(direccionStr:"Rincón 659",direccionX:-34.6167,direccionY:-58.396122,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
+		Estacionamiento estacionamiento9 = new Estacionamiento(nombre:'Gran Garage Rincón',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
+		ubicacion:ubicacion40).save()
+		estacionamiento9.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
+		Ubicacion ubicacion41 = new Ubicacion(direccionStr:"Bartolomé Mitre 2350",direccionX:-34.608532,direccionY:-58.399876,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
+		Estacionamiento estacionamiento10 = new Estacionamiento(nombre:'Sergio C Valente',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
+		ubicacion:ubicacion41).save()
+		estacionamiento10.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
+		Ubicacion ubicacion42 = new Ubicacion(direccionStr:"Viamonte 2244",direccionX:-34.601105,direccionY:-58.399113,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
+		Estacionamiento estacionamiento11 = new Estacionamiento(nombre:'Garage Viamonte',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
+		ubicacion:ubicacion42).save()
+		estacionamiento11.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
+		Ubicacion ubicacion43 = new Ubicacion(direccionStr:"Bartolome Mitre 2374",direccionX:-34.60855,direccionY:-58.400192,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
+		Estacionamiento estacionamiento12 = new Estacionamiento(nombre:'San Expedito',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
+		ubicacion:ubicacion43).save()
+		estacionamiento12.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
+		Ubicacion ubicacion44 = new Ubicacion(direccionStr:"Av Rivadavia 2151",direccionX:-34.609528,direccionY:-58.396954,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
+		Estacionamiento estacionamiento13 = new Estacionamiento(nombre:'Yesiton Sa',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
+		ubicacion:ubicacion44).save()
+		estacionamiento13.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
+		Ubicacion ubicacion45 = new Ubicacion(direccionStr:"Tte. Gral Juan Domingo Perón 2029",direccionX:-34.607063,direccionY:-58.39545,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
+		Estacionamiento estacionamiento14 = new Estacionamiento(nombre:'Garage Sucre Sa',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
+		ubicacion:ubicacion45).save()
+		estacionamiento14.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
+		Ubicacion ubicacion46 = new Ubicacion(direccionStr:"Boulogne Sur Mer 342",direccionX:-34.60613,direccionY:-58.40721,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
+		Estacionamiento estacionamiento15 = new Estacionamiento(nombre:'Garage Once S',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
+		ubicacion:ubicacion46).save()
+		estacionamiento15.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
 
 		Usuario usuarioAdmin= new Usuario (
-				nombre:"Super",
-				apellido:"Admin",
-				email:"admin@admin.com",
-				contrasenia:usuarioService.encriptar("admin"),
-				estacionamiento:estacionamiento1,
-				tipoUsuario: Usuario.getAdministrador())./*addToTarjetas(tarjeta1).*/save();
-		//		Usuario usuario2 = new Usuario (
-		//				nombre:"Operador",
-		//				apellido:"Del Estacionamiento",
-		//				email:"oper@oper.com",
-		//				contrasenia:usuarioService.encriptar("oper"),
-		//				estacionamiento:estacionamiento1,
-		//				tipoUsuario: Usuario.getOperador())./*addToTarjetas(tarjeta1).*/save();
+		nombre:"Super",
+		apellido:"Admin",
+		email:"admin@admin.com",
+		contrasenia:usuarioService.encriptar("admin"),
+		tipoUsuario: Usuario.getAdministrador()
+		).save();
 		Usuario usuarioCliente = new Usuario (
-				nombre:"Cliente",
-				apellido:"Cualquiera",
-				email:"cliente@cliente.com",
-				contrasenia:usuarioService.encriptar("cliente"),
-				tipoUsuario: Usuario.getCliente())./*addToTarjetas(tarjeta1).*/save();
+		nombre:"Cliente",
+		apellido:"Cualquiera",
+		email:"cliente@cliente.com",
+		contrasenia:usuarioService.encriptar("cliente"),
+		tipoUsuario: Usuario.getCliente()
+		).save();
+
+
 
 		Reserva reserva1 = new Reserva (
-				//				calificacion_cliente_id:2,
-				estacionamiento:1,
-				estado:'Pendiente',
-				horaDeInicio: new Date(),
-				horasReservadas:2,
-				//				pago_id:1,
-				usuario:2,
-				).save(flush: true);
+		estacionamiento:1,
+		horaDeInicio: new Date(),
+		horasReservadas:2,
+		usuario:2
+		).save();
 		Reserva reserva2 = new Reserva (
-				//				calificacion_cliente_id:2,
-				estacionamiento:1,
-				estado:'Pendiente',
-				horaDeInicio: new Date(),
-				horasReservadas:2,
-				//				pago_id:1,
-				usuario:2,
-				).save(flush: true);
+		estacionamiento:1,
+		horaDeInicio: new Date(),
+		horasReservadas:2,
+		usuario:2
+		).save();
 
-		Calificacion cal1= new Calificacion(
-				valor: 4,
-				detalle: "Todo en orden!",
-				cliente: 2,
-				estacionamiento: 1,
-				reserva: 1,
-				).save(flush: true);
 
-		Calificacion cal2= new Calificacion(
-				valor: 1,
-				detalle: "Me echaron porque venía una caravana de Audis!",
-				cliente: 2,
-				estacionamiento: 1,
-				reserva: 1,
-				).save(flush: true);
+
+		CalificacionNueva calificcionNueva1 = new CalificacionNueva(valor:4,detalle:"Todo en orden!");
+		reserva1.calificacion=calificcionNueva1
+		reserva1.save()
+		CalificacionNueva calificcionNueva2 = new CalificacionNueva(valor:1,detalle:"Me echaron porque venía una caravana de Audis!");
+		reserva2.calificacion=calificcionNueva2
+		reserva2.save()
+
+		/*		Calificacion cal1= new Calificacion(
+		 valor: 4,
+		 detalle: "Todo en orden!",
+		 cliente: 2,
+		 reserva: 1,
+		 )
+		 reserva1.calificacion=cal1
+		 reserva1.save()
+		 Calificacion cal2= new Calificacion(
+		 valor: 1,
+		 detalle: "Me echaron porque venía una caravana de Audis!",
+		 cliente: 2,
+		 reserva: 1,
+		 ).save();
+		 reserva2.calificacion=cal2
+		 reserva2.save()*/
 	}
 
 	def destroy = {

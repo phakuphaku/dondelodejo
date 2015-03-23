@@ -1,10 +1,5 @@
 package dondelodejo.com
 
-
-
-import org.junit.*
-import grails.test.mixin.*
-
 @TestFor(CocheraController)
 @Mock(Cochera)
 class CocheraControllerTests {

@@ -52,16 +52,9 @@ class ClienteService {
 		Reserva reserva = new Reserva(r)
 		Estacionamiento.get(mapa["estacionamientoId"]).addToReservas(reserva)
 		Usuario.get(((Usuario)mapa["usuario"]).id).addToReservas(reserva)
-		Pago pago=new Pago (importe:0,tarjeta:Tarjeta.get(1),estado:"PendienteDeConfirmacion")
 
 		reserva.save()//id pago null
 
-		reserva.setPago(pago)
-		reserva.save()
-
-
-		//			reserva.addToPago(pago).save()//TODO: tarjeta default
-		//			if (!reserva.validate()) return null;
 		println "RESERVA ACEPTADA"
 		Usuario usuario=mapa.get("usuario")
 

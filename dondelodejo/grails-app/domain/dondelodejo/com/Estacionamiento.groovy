@@ -26,7 +26,7 @@ class Estacionamiento {
 
 	Float puntaje=0
 
-	static hasMany = [cocheras:Cochera,reservas:Reserva,usuarios:Usuario] //, calificaciones:Calificacion]
+	static hasMany = [cocheras:Cochera,reservas:Reserva/*,usuarios:Usuario*/] //, calificaciones:Calificacion]
 	static mapping = { cocheras sort:'numero' }
 	static constraints = {
 

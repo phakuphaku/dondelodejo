@@ -10,14 +10,11 @@ class Reserva {
 	Date horaDeInicio
 	int  horasReservadas
 	/**
-	 * @Pendiente	Recien heecha la reserva, debera confirmarse el pago.
-	 * @Pagada" 	El pago fue acreditado correctamente.
 	 * @Cancelada" 	Aunque haya seguido los pasos el administrador la rechazo.
 	 * @Aceptada" 	El administrador dio su consentimiento.
 	 */
-	String estado
-	//	static hasOne = [pago:Pago]
-	Pago pago
+	String estado="Cargada"
+
 
 	//	La calificación ahora pertenece sólo a la reserva y al estacionamiento
 	//	CalificaOper calificacionOper
@@ -30,26 +27,26 @@ class Reserva {
 
 	static constraints = {
 		estado (nullable:true,inList:[
-			"Pendiente",
+			"Cargada",
 			"Aceptada",
 			"Cancelada"
-		],defaultValue:"Pendiente")
-		pago 	nullable:true
+		])
+		calificacion nullable:true
 	}
 
 
-	static ArrayList<Reserva> listadoByEstacionamientoYUsuario(Long idEstacionamiento,Long idUsuario){
-		println "LISTADO " + idEstacionamiento + idUsuario
-		Integer cantidad=0
-
-		Object[] objArray = Estacionamiento.get(idEstacionamiento).reservas.toArray()
-
-		int i=0;ArrayList<Reserva> reserva = new ArrayList<Reserva>();
-		for(i; i < objArray.length ; i++){
-			reserva.add(objArray[i])
-		}
-		return reserva
-	}
+//	static ArrayList<Reserva> listadoByEstacionamientoYUsuario(Long idEstacionamiento,Long idUsuario){
+//		println "LISTADO " + idEstacionamiento + idUsuario
+//		Integer cantidad=0
+//
+//		Object[] objArray = Estacionamiento.get(idEstacionamiento).reservas.toArray()
+//
+//		int i=0;ArrayList<Reserva> reserva = new ArrayList<Reserva>();
+//		for(i; i < objArray.length ; i++){
+//			reserva.add(objArray[i])
+//		}
+//		return reserva
+//	}
 
 	def getID() {
 		return this.id;
