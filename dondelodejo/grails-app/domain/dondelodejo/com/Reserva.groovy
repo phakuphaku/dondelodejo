@@ -10,9 +10,10 @@ class Reserva {
 	Date horaDeInicio
 	int  horasReservadas
 	/**
-	 * @Cargada		estado inicial
-	 * @Cancelada" 	Aunque haya seguido los pasos el administrador la rechazo.
-	 * @Aceptada" 	El administrador dio su consentimiento.
+	 * @Cargada		Estado inicial.
+	 * @Cancelada 	Aunque haya seguido los pasos el administrador la rechazo.
+	 * @Aceptada 	El administrador dio su consentimiento.
+	 * @Calificada  El usuario la calificó.
 	 */
 	String estado="Cargada"
 
@@ -41,6 +42,18 @@ class Reserva {
 			order("horaDeInicio", "ASC")
 		}
 		return results
+	}
+
+
+void calificar (Usuario user, int valor, char detalle) {
+
+	CalificacionNueva calificacion = new CalificacionNueva(["valor":valor, "detalle":detalle])
+	this.calificacion = calificacion
+	int cantidad = Reserva.findByEstacionamientoAndEstado(this.estacionamiento.id,"Calificada").size()+1
+	int puntaje = this.estacionamiento.puntaje
+	def nuevoPuntaje = (puntaje + valor)/cantidad	
+	this.estacionamiento.puntaje = nuevoPuntaje
+	
 	}
 
 }
