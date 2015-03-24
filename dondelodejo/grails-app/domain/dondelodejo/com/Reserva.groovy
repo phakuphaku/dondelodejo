@@ -10,17 +10,11 @@ class Reserva {
 	Date horaDeInicio
 	int  horasReservadas
 	/**
+	 * @Cargada		estado inicial
 	 * @Cancelada" 	Aunque haya seguido los pasos el administrador la rechazo.
 	 * @Aceptada" 	El administrador dio su consentimiento.
 	 */
 	String estado="Cargada"
-
-
-	//	La calificación ahora pertenece sólo a la reserva y al estacionamiento
-	//	CalificaOper calificacionOper
-	//	CalificaCliente calificacionCliente
-
-	//	Calificacion calificacionCliente
 
 	CalificacionNueva calificacion
 	static embedded = ['calificacion']
@@ -34,23 +28,19 @@ class Reserva {
 		calificacion nullable:true
 	}
 
-
-//	static ArrayList<Reserva> listadoByEstacionamientoYUsuario(Long idEstacionamiento,Long idUsuario){
-//		println "LISTADO " + idEstacionamiento + idUsuario
-//		Integer cantidad=0
-//
-//		Object[] objArray = Estacionamiento.get(idEstacionamiento).reservas.toArray()
-//
-//		int i=0;ArrayList<Reserva> reserva = new ArrayList<Reserva>();
-//		for(i; i < objArray.length ; i++){
-//			reserva.add(objArray[i])
-//		}
-//		return reserva
-//	}
-
 	def getID() {
 		return this.id;
 	}
-
+	public Reserva[] listadoPorEstacionamientoYUsuario(Long idEstacionamiento,Long idUsuario){
+		def criteria = Reserva.createCriteria()
+		def results = criteria.list {
+			and {
+				estacionamiento{	eq('id', idEstacionamiento)}
+				usuario{	        eq('id', idUsuario)}
+				}
+			order("horaDeInicio", "ASC")
+		}
+		return results
+	}
 
 }

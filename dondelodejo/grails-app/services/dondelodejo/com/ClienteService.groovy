@@ -3,6 +3,7 @@ import dondelodejo.com.Ubicacion
 import dondelodejo.com.Estacionamiento
 
 import java.lang.RuntimeException
+import java.util.logging.Logger.LoggerHelper;
 
 import org.apache.jasper.compiler.Node.ParamsAction;
 class ClienteService {
@@ -15,12 +16,9 @@ class ClienteService {
 			throw new RuntimeException("Una busqueda debe ser hecha en distancias mas extensas.")
 		}
 		//convierte metros a cuadrado con centro en la direccion dada.
-		float tolerancia = metros * Ubicacion.getGpsToMetros()
+		float tolerancia = Ubicacion.convertirMetrosAGPS(metros)
 
-		if (localidad==null) localidad = ''
-		if (pais==null)      pais = ''
-
-		def coordenadasByGoogle= Ubicacion.buscar(direccion,localidad,pais)
+		def coordenadasByGoogle= Ubicacion.buscar(direccion,(localidad==null)?localidad:'',(pais==null)?pais:'')
 
 		this.buscarPorDistancia(coordenadasByGoogle, tolerancia)
 	}
@@ -31,10 +29,8 @@ class ClienteService {
 		float desdeY = coord.get("y") - tolerancia
 		float hastaY = coord.get("y") + tolerancia
 
-		/*TODO pasar esto a un Map de Maps para no devolver la entidad 
-		 * y en los nuevos maps, agregar la distancia que tiene a las coordenadas por pitagoras.
-		 */
-		Estacionamiento.findAll(
+		/*TODO CRITERIA RESUELTO. Dejo el codigo VIEJO de muestra para REFERENCIA futura. */
+		/*	Estacionamiento.findAll(
 				"from Estacionamiento as e "+
 				"where (e.ubicacion.direccionX between ? AND ? ) "+
 				"AND (e.ubicacion.direccionY between ? AND ?) order by puntaje desc",
@@ -43,33 +39,42 @@ class ClienteService {
 					hastaX,
 					desdeY,
 					hastaY
-				])
+				])*/
+		
+		def c = Estacionamiento.createCriteria()
+		def results = c.list {
+			
+			and {
+				ubicacion{	between('direccionX', desdeX, hastaX)}
+				ubicacion{	between('direccionY', desdeY, hastaY)}
+				}
+
+			order("puntaje", "desc")
+		}
 	}
 
 	def crearReserva(Map mapa) {
-		println "CREARRESERVA "+mapa
-		def r=mapa["reserva"]
-		Reserva reserva = new Reserva(r)
-		Estacionamiento.get(mapa["estacionamientoId"]).addToReservas(reserva)
-		Usuario.get(((Usuario)mapa["usuario"]).id).addToReservas(reserva)
-
-		reserva.save()//id pago null
-
-		println "RESERVA ACEPTADA"
-		Usuario usuario=mapa.get("usuario")
-
-		if (mapa["estacionamientoId"] && (usuario)){
-			Estacionamiento.get(mapa["estacionamientoId"]).addToReservas(reserva).save(flush:true)
-			println "RESERVA ADD EXITOSO"
-			return reserva.id
+		LoggerService.Log("ingreso a CREARRESERVA con "+mapa.toString())
+		
+		Reserva reserva = new Reserva(mapa["reserva"])
+		def estacionamientoId = mapa["estacionamientoId"]
+		def usuario = mapa["usuario"]
+		
+		try{		
+			//creo la nueva reserva
+			Estacionamiento.get(estacionamientoId).addToReservas(reserva)
+			Usuario.get(((Usuario)usuario).id).addToReservas(reserva)
+			//De acuerdo a lo aprendido, estacionamiento y usuario ya estan guardados.
+			reserva.save()
+		}catch (Exception e){
+			LoggerService.Log("Error en la creacion de reserva")
+			throw new RuntimeException("DATOS INSUFICIENTES PARA LA OPERACION")
 		}
-		else {
-			println "DATOS INSUFICIENTES PARA LA OPERACION"
-			return null;
-		}
+		LoggerService.Log("RESERVA ACEPTADA")
+		return reserva.id
 	}
 	def Reserva[] listadoReservas (Long idEstacionamiento,Long idUsuario) {
-		Reserva.listadoByEstacionamientoYUsuario(idEstacionamiento, idUsuario)
+		return Reserva.listadoPorEstacionamientoYUsuario(idEstacionamiento,idUsuario)
 	}
 
 }

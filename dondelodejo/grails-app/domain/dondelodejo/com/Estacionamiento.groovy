@@ -161,4 +161,7 @@ class Ubicacion {
 				(this.direccionY<hastaY)
 				)
 	}
+	def static convertirMetrosAGPS(Integer metros){
+		return metros * Ubicacion.getGpsToMetros()
+	}
 }
