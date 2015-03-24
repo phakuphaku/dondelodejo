@@ -54,6 +54,7 @@ void calificar (Usuario user, int valor, char detalle) {
 	}
 
 }
+/* sarasa */
 
 class Calificacion {
 	
