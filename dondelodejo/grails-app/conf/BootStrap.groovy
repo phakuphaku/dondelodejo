@@ -1,6 +1,5 @@
 import java.util.Date;
 
-import dondelodejo.com.CalificacionNueva
 import dondelodejo.com.Cochera
 import dondelodejo.com.Estacionamiento
 import dondelodejo.com.Ubicacion
@@ -192,11 +191,11 @@ class BootStrap {
 
 
 
-		CalificacionNueva calificcionNueva1 = new CalificacionNueva(valor:4,detalle:"Todo en orden!");
-		reserva1.calificacion=calificcionNueva1
+		Calificacion calificcion1 = new Calificacion(valor:4,detalle:"Todo en orden!");
+		reserva1.calificacion=calificcion1
 		reserva1.save()
-		CalificacionNueva calificcionNueva2 = new CalificacionNueva(valor:1,detalle:"Me echaron porque venía una caravana de Audis!");
-		reserva2.calificacion=calificcionNueva2
+		Calificacion calificcion2 = new Calificacion(valor:1,detalle:"Me echaron porque venía una caravana de Audis!");
+		reserva2.calificacion=calificcion2
 		reserva2.save()
 
 	}
