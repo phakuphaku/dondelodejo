@@ -30,8 +30,8 @@ class Reserva {
 
 	def getID() {
 		return this.id;
-	}
-	public Reserva[] listadoPorEstacionamientoYUsuario(Long idEstacionamiento,Long idUsuario){
+	}                
+	public static Reserva[] listadoPorEstacionamientoYUsuario(Long idEstacionamiento,Long idUsuario){
 		def criteria = Reserva.createCriteria()
 		def results = criteria.list {
 			and {

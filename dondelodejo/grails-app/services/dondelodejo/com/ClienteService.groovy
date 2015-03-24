@@ -1,6 +1,7 @@
 package dondelodejo.com
 import dondelodejo.com.Ubicacion
 import dondelodejo.com.Estacionamiento
+import dondelodejo.com.Reserva
 
 import java.lang.RuntimeException
 import java.util.logging.Logger.LoggerHelper;
