@@ -1,8 +1,6 @@
 package dondelodejo.com
 import dondelodejo.com.Estacionamiento
 import dondelodejo.com.Usuario
-//import dondelodejo.com.calificaciones.CalificaOper
-//import dondelodejo.com.calificaciones.CalificaCliente
 
 class Reserva {
 
@@ -16,7 +14,7 @@ class Reserva {
 	 */
 	String estado="Cargada"
 
-	CalificacionNueva calificacion
+	Calificacion calificacion
 	static embedded = ['calificacion']
 
 	static constraints = {
@@ -44,3 +42,16 @@ class Reserva {
 	}
 
 }
+class Calificacion {
+	
+		Integer valor
+		String detalle
+	
+		static constraints = {
+			valor 	 	    nullable : false, inList:[1, 2, 3, 4, 5]
+			detalle 	    nullable : true
+		}
+	
+		void calificar (Usuario administrador, Usuario cliente) {
+		}
+	}
