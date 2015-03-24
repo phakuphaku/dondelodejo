@@ -20,7 +20,7 @@ class Reserva {
 	static constraints = {
 		estado (nullable:true,inList:[
 			"Cargada",
-			"Aceptada","Calificada",
+			"Aceptada",
 			"Cancelada"
 		])
 		calificacion nullable:true
@@ -40,17 +40,22 @@ class Reserva {
 		}
 		return results
 	}
-	void calificar (Usuario user, int valor, char detalle) {
-		
-		 Calificacion calificacion = new Calificacion(["valor":valor, "detalle":detalle])
-		 this.calificacion = calificacion
-		 int cantidad = Reserva.findByEstacionamientoAndEstado(this.estacionamiento.id,"Calificada").size()+1
-		 int puntaje = this.estacionamiento.puntaje
-		 def nuevoPuntaje = (puntaje + valor)/cantidad
-		 this.estacionamiento.puntaje = nuevoPuntaje
-		 
-		 }
+
+
+void calificar (Usuario user, int valor, char detalle) {
+
+	CalificacionNueva calificacion = new CalificacionNueva(["valor":valor, "detalle":detalle])
+	this.calificacion = calificacion
+	int cantidad = Reserva.findByEstacionamientoAndEstado(this.estacionamiento.id,"Calificada").size()+1
+	int puntaje = this.estacionamiento.puntaje
+	def nuevoPuntaje = (puntaje + valor)/cantidad	
+	this.estacionamiento.puntaje = nuevoPuntaje
+	
+	}
+
 }
+/* sarasa */
+
 class Calificacion {
 	
 		Integer valor
