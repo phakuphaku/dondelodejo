@@ -40,8 +40,7 @@ class Reserva {
 		}
 		return results
 	}
-
-
+	
 	void calificar (Usuario user, int valor, char detalle){
 
 		CalificacionNueva calificacion = new CalificacionNueva(["valor":valor, "detalle":detalle])
@@ -54,7 +53,6 @@ class Reserva {
 	}
 
 }
-
 
 class Calificacion {
 	
