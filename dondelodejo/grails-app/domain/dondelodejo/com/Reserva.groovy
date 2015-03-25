@@ -42,19 +42,19 @@ class Reserva {
 	}
 
 
-void calificar (Usuario user, int valor, char detalle) {
+	void calificar (Usuario user, int valor, char detalle){
 
-	CalificacionNueva calificacion = new CalificacionNueva(["valor":valor, "detalle":detalle])
-	this.calificacion = calificacion
-	int cantidad = Reserva.findByEstacionamientoAndEstado(this.estacionamiento.id,"Calificada").size()+1
-	int puntaje = this.estacionamiento.puntaje
-	def nuevoPuntaje = (puntaje + valor)/cantidad	
-	this.estacionamiento.puntaje = nuevoPuntaje
+		CalificacionNueva calificacion = new CalificacionNueva(["valor":valor, "detalle":detalle])
+		this.calificacion = calificacion
+		int cantidad = Reserva.findByEstacionamientoAndEstado(this.estacionamiento.id,"Calificada").size()+1
+		int puntaje = this.estacionamiento.puntaje
+		def nuevoPuntaje = (puntaje + valor)/cantidad	
+		this.estacionamiento.puntaje = nuevoPuntaje
 	
 	}
 
 }
-/* sarasa */
+
 
 class Calificacion {
 	
@@ -66,6 +66,4 @@ class Calificacion {
 			detalle 	    nullable : true
 		}
 	
-		void calificar (Usuario administrador, Usuario cliente) {
-		}
 	}
