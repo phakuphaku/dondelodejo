@@ -33,30 +33,84 @@ class Reserva {
 	
 	/** @Motivo Cliente en su muro, tiene una lista de Estacionamientos que visitÃ³. (los toma de las reservas que fueron creadas) */
 	def static Estacionamiento[] listadoDeEstacionamientosPorCliente(Long idCliente){
-		//TODO Metodo sin codear
+		//TODO Generar vista/sevicio para que llame a este método
+		
+		Estacionamiento[] estacionamientos 
+		
+		def criteria = Usuario.createCriteria()
+		def usuario = criteria.list {
+				if (idCliente != null)	usuario{ eq('id', idCliente)}
+		}
+		
+		estacionamientos add (usuario.reservas.each { res -> res.getEstacionamiento() })
+		
+		return estacionamientos
+
 	}
+	
 	def static Usuario[] listadoDeClientesPorEstacionamiento(Long idEstacionamiento){
-	//TODO Metodo sin codear
+	//TODO Generar vista/sevicio para que llame a este método		
+		
+		Usuario[] usuarios
+		
+		def criteria = Estacionamiento.createCriteria()
+		def estacionamiento = criteria.list {
+				if (idEstacionamiento != null)	estacionamiento{ eq('id', idEstacionamiento)}
+		}
+		
+		usuarios add (estacionamiento.reservas.each { res -> res.getUsuario() })
+		
+		return usuarios
+		
 	}
 	/**3.En la pantalla de operador debe existir un listado o link con las reservas aceptadas para poder seÃ±alarlas como utilizadas*/
 	def static getReservasAceptadasPorEstacionamiento(Long idEstacionamiento){
 	//TODO Metodo sin codear USAR getReservasPorEstacionamientoYClienteYEstado
-	}
+		
+		return this.getReservasPorEstacionamientoYClienteYEstado(idEstacionamiento,null,null)
+		
+ 	}
+	
 	/**Generalizcion del anterior y algunos siguientes tambien*/
-	def static getReservasPorEstacionamientoYClienteYEstado(Long idEstacionamiento,Long idCliente,String estado){
-	//TODO Metodo sin codear
+	def static getReservasPorEstacionamientoYClienteYEstado(Long idEstacionamiento,Long idCliente,String estado){	
+		
+		def criteria = Reserva.createCriteria()
+		def reservas = criteria.list {
+			and {
+				if (idEstacionamiento != null)	estacionamiento{	eq('id', idEstacionamiento)}
+				if (idCliente         != null)	usuario{	        eq('id', idCliente)}
+				if (estado            != null)  estado {            eq('estado', estado)}
+				}
+		}
+		return reservas()
+		
 	}
+
 	/** 4.Cliente califica la reserva. estado CALIFxCLI. Con esta calificacion se actualiza el puntaje del estacionamiento. */
 	def static getReservasUtilizadasPorCliente(Long idCliente){
 	//TODO Metodo sin codear USAR getReservasPorEstacionamientoYClienteYEstado
+		
+		return this.getReservasPorEstacionamientoYClienteYEstado(null,idCliente,"CALIFxCLI")
 	}
+	
 	/**5.Admin "califica" al cliente. estado COMPLETA. Seria mas bien una replica en caso de que el cliente califica negativo.*/
 	def static getReservasCalificadasPorElClientePorEstacionamiento(Long idEstacionamiento){
 	//TODO Metodo sin codear USAR getReservasPorEstacionamientoYClienteYEstado
+		
+		return this.getReservasPorEstacionamientoYClienteYEstado(idEstacionamiento,null,"COMPLETA")
+		
 	}
 	/**El detalle de estacionamiento tiene un resumen de las ultimas calificaciones recibidas por el estacionamiento.*/
 	def static listadoDeCalificacionesRecibidasPorEstacionamiento(Long idEstacionamiento){
 	//TODO Metodo sin codear
+		
+		def criteria = Estacionamiento.createCriteria()
+		def estacionamiento = criteria.list {
+				if (idEstacionamiento != null)	estacionamiento{ eq('id', idEstacionamiento)}
+		}
+		
+		return estacionamiento.getReservas().each { r -> r.getcalificacionDelClienteAlEstacionamiento} 
+		
 	}
 	
 	/** @params si son null se anula ese filtro */
