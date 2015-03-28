@@ -24,9 +24,10 @@ class UsuarioService {
 	}
 	def esTipoUsuario (Usuario usuario,String tipo) {
 		if (!validarUsuario(usuario)) {
-			throw new RuntimeException("El Usuario no es válido")
+			throw new RuntimeException("El Usuario no es vï¿½lido")
 		}
 		def tipoDeUsuario = false
+		//TODO FACUNDO arreglar metodo y sacar switch
 		switch ( tipo ) {
 			case Usuario.getUSUARIO_ADMINISTRADOR():
 				tipoDeUsuario = usuario.esSoporte()
@@ -46,8 +47,6 @@ class UsuarioService {
 		return tipoDeUsuario
 	}
 	def guardarUsuario() {
-	}
-	def crear(){
 	}
 	def encriptar(String pass){
 		String passwordToHash = pass;
