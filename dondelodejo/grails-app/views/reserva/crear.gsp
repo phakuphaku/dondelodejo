@@ -68,7 +68,7 @@
 				<div>
 					<label for="horasReservadas">Horas que quiere reservar:</label>
 					<g:textField name="horasReservadas"
-						value="${reservaFiltro?.horasReservadas}" />
+						value="${reservaFiltro?.cantidadHorasReservadas}" />
 				</div>
 				<div id="submit">
 					<g:submitButton name="crear" value="Crear la Reserva" />
@@ -93,7 +93,7 @@
 					${r.horaDeInicio}
 				</td>
 				<td>
-					${r.horasReservadas}
+					${r.cantidadHorasReservadas}
 				</td>
 				<td>
 					${r.estado}

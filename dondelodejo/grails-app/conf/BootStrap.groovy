@@ -1,6 +1,5 @@
 import java.util.Date;
 
-import dondelodejo.com.CalificacionNueva
 import dondelodejo.com.Cochera
 import dondelodejo.com.Estacionamiento
 import dondelodejo.com.Ubicacion
@@ -131,11 +130,11 @@ class BootStrap {
 		Estacionamiento estacionamiento8 = new Estacionamiento(nombre:'Edifa',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
 		ubicacion:ubicacion9).save()
 		estacionamiento8.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
-		Ubicacion ubicacion40 = new Ubicacion(direccionStr:"Rincón 659",direccionX:-34.6167,direccionY:-58.396122,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
-		Estacionamiento estacionamiento9 = new Estacionamiento(nombre:'Gran Garage Rincón',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
+		Ubicacion ubicacion40 = new Ubicacion(direccionStr:"Rincï¿½n 659",direccionX:-34.6167,direccionY:-58.396122,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
+		Estacionamiento estacionamiento9 = new Estacionamiento(nombre:'Gran Garage Rincï¿½n',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
 		ubicacion:ubicacion40).save()
 		estacionamiento9.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
-		Ubicacion ubicacion41 = new Ubicacion(direccionStr:"Bartolomé Mitre 2350",direccionX:-34.608532,direccionY:-58.399876,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
+		Ubicacion ubicacion41 = new Ubicacion(direccionStr:"Bartolomï¿½ Mitre 2350",direccionX:-34.608532,direccionY:-58.399876,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
 		Estacionamiento estacionamiento10 = new Estacionamiento(nombre:'Sergio C Valente',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
 		ubicacion:ubicacion41).save()
 		estacionamiento10.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
@@ -151,7 +150,7 @@ class BootStrap {
 		Estacionamiento estacionamiento13 = new Estacionamiento(nombre:'Yesiton Sa',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:2,
 		ubicacion:ubicacion44).save()
 		estacionamiento13.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
-		Ubicacion ubicacion45 = new Ubicacion(direccionStr:"Tte. Gral Juan Domingo Perón 2029",direccionX:-34.607063,direccionY:-58.39545,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
+		Ubicacion ubicacion45 = new Ubicacion(direccionStr:"Tte. Gral Juan Domingo Perï¿½n 2029",direccionX:-34.607063,direccionY:-58.39545,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
 		Estacionamiento estacionamiento14 = new Estacionamiento(nombre:'Garage Sucre Sa',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:3,
 		ubicacion:ubicacion45).save()
 		estacionamiento14.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
@@ -180,23 +179,23 @@ class BootStrap {
 		Reserva reserva1 = new Reserva (
 				estacionamiento:1,
 				horaDeInicio: new Date(),
-				horasReservadas:2,
+				cantidadHorasReservadas:2,
 				usuario:2
 				).save();
 		Reserva reserva2 = new Reserva (
 				estacionamiento:1,
 				horaDeInicio: new Date(),
-				horasReservadas:2,
+				cantidadHorasReservadas:2,
 				usuario:2
 				).save();
 
 
 
-		CalificacionNueva calificcionNueva1 = new CalificacionNueva(valor:4,detalle:"Todo en orden!");
-		reserva1.calificacion=calificcionNueva1
+		Calificacion calificcion1 = new Calificacion(valor:4,detalle:"Todo en orden!");
+		reserva1.calificacionDelClienteAlEstacionamiento=calificcion1
 		reserva1.save()
-		CalificacionNueva calificcionNueva2 = new CalificacionNueva(valor:1,detalle:"Me echaron porque venía una caravana de Audis!");
-		reserva2.calificacion=calificcionNueva2
+		Calificacion calificcion2 = new Calificacion(valor:1,detalle:"Me echaron porque venï¿½a una caravana de Audis!");
+		reserva2.calificacionDelClienteAlEstacionamiento=calificcion2
 		reserva2.save()
 
 	}
