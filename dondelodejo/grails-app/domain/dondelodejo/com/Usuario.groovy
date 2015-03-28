@@ -2,14 +2,15 @@ package dondelodejo.com
 
 class Usuario {
 
+	static final String USUARIO_SOPORTE='SOP'
 	static final String USUARIO_ADMINISTRADOR='ADM'
-	static final String USUARIO_OPERADOR='OPE'
 	static final String USUARIO_CLIENTE='CLI'
+	
+	public static getSoporte(){
+		USUARIO_SOPORTE
+	}
 	public static getAdministrador(){
 		USUARIO_ADMINISTRADOR
-	}
-	public static getOperador(){
-		USUARIO_OPERADOR
 	}
 	public static getCliente(){
 		USUARIO_CLIENTE
@@ -30,18 +31,18 @@ class Usuario {
 		email		nullable:false,email:true
 		contrasenia	nullable:false,blank:false
 		tipoUsuario nullable:true,inList: [
+			getSoporte(),
 			getAdministrador(),
-			getOperador(),
 			getCliente()
 		],defaultValue:this.getCliente()
 //		estacionamiento nullable:true
 	}
 
+	def esSoporte(){
+		this.tipoUsuario == USUARIO_SOPORTE
+	}
 	def esAdministrador(){
 		this.tipoUsuario == USUARIO_ADMINISTRADOR
-	}
-	def esOperador(){
-		this.tipoUsuario == USUARIO_OPERADOR
 	}
 	def esCliente(){
 		this.tipoUsuario == USUARIO_CLIENTE

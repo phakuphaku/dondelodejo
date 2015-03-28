@@ -45,11 +45,12 @@ class ClienteService {
 		def c = Estacionamiento.createCriteria()
 		def results = c.list {
 			
-			and {
-				ubicacion{	between('direccionX', desdeX, hastaX)}
-				ubicacion{	between('direccionY', desdeY, hastaY)}
+			ubicacion{
+				and {
+					between("direccionX", desdeX, hastaX)
+					between("direccionY", desdeY, hastaY)
 				}
-
+			}
 			order("puntaje", "desc")
 		}
 	}
