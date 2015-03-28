@@ -30,11 +30,11 @@ class LoginController {
 	void setHomeAtSession (Usuario usuario) {
 		String home = "index" //for unknows
 		Long homeId=null
-		if (usuario.esAdministrador()) {
+		if (usuario.esSoporte()) {
 			home="administrador";
 //			homeId=usuario.estacionamiento.id
 		}
-		if (usuario.esOperador()) {
+		if (usuario.esAdministrador()) {
 			home="operador";
 //			homeId=usuario.estacionamiento.id
 		}
