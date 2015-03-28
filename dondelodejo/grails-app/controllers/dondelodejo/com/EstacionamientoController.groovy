@@ -10,12 +10,7 @@ class EstacionamientoController {
 
 	def clienteService
 	def estacionamientoService
-	def beforeInterceptor = [action:this.&checkUser,except:[
-			'index',
-			'mostrar',
-			'listado',
-			'buscarPorDistancia'
-		]]
+	def beforeInterceptor = [action:this.&checkUser,except:['index', 'mostrar', 'listado', 'buscarPorDistancia']]
 	def checkUser() {
 		if(!session.getAttribute("usuario")) {
 			// i.e. user not logged in
@@ -56,7 +51,7 @@ class EstacionamientoController {
 		}
 	}
 
-		//TODO: El mostrar no debe devolver el objeto. Pasar a Servicio.
+	//TODO: El mostrar no debe devolver el objeto. Pasar a Servicio.
 	def mostrar () {
 		conEstacionamiento { estacionamiento ->
 			println "MOSTRAR "+estacionamiento.getId()
@@ -136,23 +131,23 @@ class EstacionamientoController {
 		}
 	}
 
-	def operador () {
-		conEstacionamiento { estacionamiento ->
-			println "OPERADOR "+estacionamiento.getId()
-			[estacionamiento:estacionamiento]
-		}
-	}
+	//	def operador () {
+	//		conEstacionamiento { estacionamiento ->
+	//			println "OPERADOR "+estacionamiento.getId()
+	//			[estacionamiento:estacionamiento]
+	//		}
+	//	}
 
 	def administrador () {
-		//TODO sin codificar. falta tener las altas de estacionamiento hechas
-		println "PERFIL ADMIN"
-
+		conEstacionamiento { estacionamiento ->
+			println "ADMINISTRADOR "+estacionamiento.getId()
+			[estacionamiento:estacionamiento]
+		}
 	}
 
 	def	cliente () {
 		//TODO sin codificar. falta tener las altas de estacionamiento hechas
 		println "PERFIL CLIENTE"
-
 	}
 
 	def cambiarEstadoCochera () {
@@ -164,7 +159,7 @@ class EstacionamientoController {
 			flash.message = estacionamientoService.cobrarCochera(Long.valueOf(params["cocheraId"]))
 		}
 		println "ALGO " + algo
-		redirect action:"operador", id:params["estacionamientoId"]
+		redirect action:"administrador", id:params["estacionamientoId"]
 	}
 
 }

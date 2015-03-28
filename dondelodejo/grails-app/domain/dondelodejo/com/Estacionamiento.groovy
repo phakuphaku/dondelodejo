@@ -15,7 +15,7 @@ class Estacionamiento {
 	static embedded = ['ubicacion']
 	//datos aplicacion
 	String aceptaReservas // S OR N
-	String foto // será la url de una foto online.
+	String foto // URL de la foto
 
 
 	//Mantenimiento

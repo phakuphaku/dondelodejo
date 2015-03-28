@@ -10,8 +10,7 @@ import dondelodejo.com.Calificacion
 class BootStrap {
 	def usuarioService
 
-	def init = {
-		servletContext ->
+	def init = { servletContext ->
 		Integer numCocheras = 25
 
 		Ubicacion ubicacion1 = new Ubicacion(
@@ -70,10 +69,6 @@ class BootStrap {
 					)
 			estacionamiento2.addToCocheras(cochera2);
 		}
-
-
-
-
 
 		Ubicacion ubicacion3 = new Ubicacion(
 				direccionStr:"Libertad 1234",
@@ -160,10 +155,10 @@ class BootStrap {
 		estacionamiento15.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
 
 		Usuario usuarioAdmin= new Usuario (
-				nombre:"Super",
-				apellido:"Admin",
-				email:"admin@admin.com",
-				contrasenia:usuarioService.encriptar("admin"),
+				nombre:"Soporte",
+				apellido:"Master of the Universe",
+				email:"soporte@soporte.com",
+				contrasenia:usuarioService.encriptar("soporte"),
 				tipoUsuario: Usuario.getAdministrador()
 				).save();
 		Usuario usuarioSoporte= new Usuario (
@@ -181,7 +176,15 @@ class BootStrap {
 				tipoUsuario: Usuario.getCliente()
 				).save();
 
-
+		// Admin. del primer estacionamiento
+		Usuario usuarioAdmin1 = new Usuario (
+				nombre:"Admin de",
+				apellido:" Rivadavia 502",
+				email:"admin1@admin1.com",
+				contrasenia:usuarioService.encriptar("admin1"),
+				tipoUsuario: Usuario.getAdministrador(),
+				estacionamiento: estacionamiento1
+				).save();
 
 		Reserva reserva1 = new Reserva (
 				estacionamiento:1,
@@ -196,15 +199,12 @@ class BootStrap {
 				usuario:2
 				).save();
 
-
-
 		Calificacion calificcion1 = new Calificacion(valor:4,detalle:"Todo en orden!");
 		reserva1.calificacionDelClienteAlEstacionamiento=calificcion1
 		reserva1.save()
 		Calificacion calificcion2 = new Calificacion(valor:1,detalle:"Me echaron porque ven�a una caravana de Audis!");
 		reserva2.calificacionDelClienteAlEstacionamiento=calificcion2
 		reserva2.save()
-
 	}
 
 	def destroy = {
