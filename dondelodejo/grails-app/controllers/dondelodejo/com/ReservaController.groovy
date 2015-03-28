@@ -21,7 +21,7 @@ class ReservaController {
 	def crear () {
 		//creo la reserva para el filtro de creacion
 		Reserva reserva = new Reserva()
-		reserva.horasReservadas=1
+		reserva.cantidadHorasReservadas=1
 		Reserva[] listadoReservas
 		if (params["id"]){
 			//hago la busqueda para encontrar las reservas ya hechas.
