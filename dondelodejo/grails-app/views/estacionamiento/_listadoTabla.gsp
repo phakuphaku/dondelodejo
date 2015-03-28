@@ -10,7 +10,11 @@
 					<th>Coordenadas</th>
 					<th>$ Hora</th>
 					<th>Calificación</th>
-					<th colspan="3" class="admin">Opciones</th>
+					<g:if test="${session.usuario}">
+						<g:if test="${session.usuario.esSoporte()}">
+							<th colspan="3" class="admin">Opciones</th>
+						</g:if>
+					</g:if>
 				</tr>
 			</thead>
 
@@ -54,12 +58,16 @@
 						${e.puntaje}
 					</g:else></td>
 
-				<td class="admin"><g:link controller="estacionamiento"
-						action="editar" id="${e.id}">Editar</g:link></td>
-				<td class="admin"><g:link controller="estacionamiento"
-						action="borrar" id="${e.id}">Eliminar</g:link></td>
-				<td class="admin"><g:link controller="estacionamiento"
-						action="operador" id="${e.id}">Operador</g:link></td>
+					<g:if test="${session.usuario}">
+						<g:if test="${session.usuario.esSoporte()}">
+							<td class="admin"><g:link controller="estacionamiento"
+									action="editar" id="${e.id}">Editar</g:link></td>
+							<td class="admin"><g:link controller="estacionamiento"
+									action="borrar" id="${e.id}">Eliminar</g:link></td>
+							<td class="admin"><g:link controller="estacionamiento"
+									action="operador" id="${e.id}">Operador</g:link></td>
+						</g:if>
+					</g:if>
 				</tr>
 			</g:each>
 		</table>

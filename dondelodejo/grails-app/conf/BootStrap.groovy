@@ -164,6 +164,13 @@ class BootStrap {
 				apellido:"Admin",
 				email:"admin@admin.com",
 				contrasenia:usuarioService.encriptar("admin"),
+				tipoUsuario: Usuario.getAdministrador()
+				).save();
+		Usuario usuarioSoporte= new Usuario (
+				nombre:"Super",
+				apellido:"Soporte",
+				email:"soporte@soporte.com",
+				contrasenia:usuarioService.encriptar("soporte"),
 				tipoUsuario: Usuario.getSoporte()
 				).save();
 		Usuario usuarioCliente = new Usuario (
