@@ -19,7 +19,7 @@ class ClienteService {
 		//convierte metros a cuadrado con centro en la direccion dada.
 		float tolerancia = Ubicacion.convertirMetrosAGPS(metros)
 
-		def coordenadasByGoogle= Ubicacion.buscar(direccion,(localidad==null)?localidad:'',(pais==null)?pais:'')
+		def coordenadasByGoogle= Ubicacion.buscar(direccion,localidad,pais)
 
 		this.buscarPorDistancia(coordenadasByGoogle, tolerancia)
 	}
