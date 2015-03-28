@@ -29,7 +29,7 @@ class UsuarioService {
 		def tipoDeUsuario = false
 		switch ( tipo ) {
 			case Usuario.getUSUARIO_ADMINISTRADOR():
-				tipoDeUsuario = usuario.esAdministrador()
+				tipoDeUsuario = usuario.esSoporte()
 				break
 
 			case Usuario.getUSUARIO_CLIENTE():
@@ -37,7 +37,7 @@ class UsuarioService {
 				break
 
 			case Usuario.getUSUARIO_OPERADOR():
-				tipoDeUsuario = usuario.esOperador()
+				tipoDeUsuario = usuario.esAdministrador()
 				break
 
 			default:
