@@ -26,17 +26,10 @@
 </head>
 
 <body>
-	<%--	<div id="dondeLoDejoLogo" role="banner" align="center">--%>
-	<%--		<img class="original"--%>
-	<%--			src="${resource(dir: 'images', file: 'dondelodejo_logo.png')}"--%>
-	<%--			alt="Grails" /><br />--%>
 
 	<%--TOP: Barra de navegación--%>
 	<div class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
-			<%--			<div class="navbar-header">--%>
-			<%--				<a class="navbar-brand" href="../">DondeLoDejo.com</a>--%>
-			<%--			</div>--%>
 
 			<g:link controller="login" action="home">
 				<div class="navbar-header">
@@ -104,7 +97,7 @@
 				<g:else>
 					<div class="alert alert-dismissible alert-info">
 				</g:else>
-				<%--				<div class="alert alert-dismissible alert-info">--%>
+				<%--<div class="alert alert-dismissible alert-info">--%>
 				<button type="button" class="close" data-dismiss="alert">×</button>
 				<p>
 					${flash.message}
@@ -115,12 +108,25 @@
 
 	<g:layoutBody />
 
+	<%-- FOOTER --------------------------------------------------------------------%>
 	<div class="footer" role="contentinfo"></div>
 	<div id="spinner" class="spinner" style="display: none;">
 		<g:message code="spinner.alt" default="Loading&hellip;" />
 	</div>
+
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#">2015 &copy; dondelodejo.com</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
 	<g:javascript library="application" />
-<%--	<r:layoutResources />--%>
-	</div>
+	<%--	<r:layoutResources />--%>
+
 </body>
 </html>

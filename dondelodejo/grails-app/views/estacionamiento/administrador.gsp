@@ -7,8 +7,85 @@
 </head>
 <body>
 	<div id="page-body" role="main">
-		<span>Ud es un administrador</span> <a href="<g:message code="default.link.listado" default="/dondelodejo/estacionamiento/listado"/>">volver al
-			listado</a>
+
+<%-- Se obtiene el estacionamiento del administrador --%>
+
+		<%--HEADER--%>
+		<legend>
+			Estacionamiento <b>
+				${estacionamiento.nombre}
+			</b>
+		</legend>
+		<%--Detalle del estacionamiento--%>
+		<blockquote>
+			<p>
+				${estacionamiento.ubicacion?.direccionStr}
+			</p>
+			<p>
+				${estacionamiento.numCocheras}
+				cocheras.
+			</p>
+		</blockquote>
+
+		<table class="table table-striped table-hover ">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>$ 60'</th>
+					<th>$ 15'</th>
+					<th>Ingreso</th>
+					<th>Egreso (esperado)</th>
+					<th>Ocupar / Liberar</th>
+				</tr>
+			</thead>
+
+			<g:each in="${estacionamiento.cocheras}" var="c">
+				<g:if test='${c.estaOcupada()}'>
+					<tr class="danger">
+						<td class="tdOperador tdOcupada">
+				</g:if>
+				<g:else>
+					<tr class="">
+						<td class="tdOperador tdLibre">
+				</g:else>
+				${c.numero}
+				</td>
+				<td>$ ${c.precioCocheraHora}
+				</td>
+				<td>$ ${c.precioCocheraFraccion}
+				</td>
+
+				<%--Si la cochera está ocupada, se muestra la hora de ingreso y egreso.--%>
+				<g:if test='${c.estaOcupada()}'>
+					<td>
+						${c.horaOcupacion}
+					</td>
+					<td>
+						${c.horaLiberacion}
+					</td>
+				</g:if>
+				<g:else>
+					<td></td>
+					<td></td>
+				</g:else>
+
+				<td><g:form action="cambiarEstadoCochera">
+						<g:textField style="display:none" name="estacionamientoId"
+							value="${estacionamiento.id}" />
+						<g:textField style="display:none" name="cocheraId" value="${c.id}" />
+						<g:if test='${c.estaOcupada()}'>
+							<g:submitButton name="liberar" class="btn btn-primary btn-xs"
+								value="LIBERAR" />
+						</g:if>
+						<g:else>
+							<g:submitButton name="ocupar" class="btn btn-default btn-xs"
+								value="OCUPAR" />
+						</g:else>
+					</g:form></td>
+			</g:each>
+			</tr>
+		</table>
+		<g:link controller="estacionamiento" action="listado">Volver al listado</g:link>
 	</div>
 </body>
 
