@@ -26,7 +26,13 @@
 				cocheras.
 			</p>
 		</blockquote>
-
+		<legend>
+			Reservas:
+		</legend>
+		<g:render template="listadoReservasParaAdministrador"/>
+		<legend>
+			Su Disponibilidad:
+		</legend>
 		<table class="table table-striped table-hover ">
 			<thead>
 				<tr>

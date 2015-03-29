@@ -1,7 +1,7 @@
 	<table class="table table-striped table-hover table-clickable">
 		<thead>
 			<tr>
-				<th>Fecha</th>
+				<th>Horario Reservado</th>
 				<th>Duración</th>
 				<th>Dirección</th>
 				<th colspan="2">Estado</th>
