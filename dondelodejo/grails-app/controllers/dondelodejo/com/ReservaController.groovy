@@ -22,7 +22,7 @@ class ReservaController {
 		//creo la reserva para el filtro de creacion
 		Reserva reserva = new Reserva()
 		reserva.cantidadHorasReservadas=1
-		Reserva[] listadoReservas
+		Reserva[] listadoReservas=null
 		if (params["id"]){
 			//hago la busqueda para encontrar las reservas ya hechas.
 			listadoReservas = clienteService.listadoReservas(Long.valueOf(params["id"]), ((Usuario)session.getAttribute("usuario")).id)

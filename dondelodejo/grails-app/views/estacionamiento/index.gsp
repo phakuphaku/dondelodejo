@@ -8,7 +8,8 @@
 <body>
 	<div id="page-body" role="main">
 		<div class="jumbotron">
-			<h1>Bienvenido!</h1>
+			<h1>Bienvenido a DondeLoDejo.com</h1>
+			<span></span>
 		</div>
 	</div>
 </body>
