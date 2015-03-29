@@ -13,5 +13,7 @@ class ReservaService {
 		
 		Reserva.getReservasPorEstacionamientoYClienteYEstado(idEstacionamiento, idCliente, estado)
 	}
-	
+	def aceptarReserva(Long id){
+		Reserva.get(id).aceptar().save()
+	}
 }

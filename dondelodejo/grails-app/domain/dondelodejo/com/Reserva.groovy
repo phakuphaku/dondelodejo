@@ -5,12 +5,12 @@ import dondelodejo.com.Usuario
 class Reserva {
 
 	//Constantes
-	private final String ESTADO_PENDIENTE = "PENDIENTE";
-	private final String ESTADO_ACEPTADA = "ACEPTADA";
-	private final String ESTADO_CANCELADA= "CANCELADA";
-	private final String ESTADO_UTILIZADA = "UTILIZADA";
-	private final String ESTADO_CALIFICADA_POR_CLIENTE = "CALIFxCLI";
-	private final String ESTADO_COMPLETA = "COMPLETA";
+	private static final String ESTADO_PENDIENTE = "PENDIENTE";
+	private static final String ESTADO_ACEPTADA = "ACEPTADA";
+	private static final String ESTADO_CANCELADA= "CANCELADA";
+	private static final String ESTADO_UTILIZADA = "UTILIZADA";
+	private static final String ESTADO_CALIFICADA_POR_CLIENTE = "CALIFxCLI";
+	private static final String ESTADO_COMPLETA = "COMPLETA";
 	
 	static belongsTo = [estacionamiento:Estacionamiento,usuario:Usuario];
 	/** Hora en que el cliente piensa ocupar la cochera*/
@@ -33,7 +33,7 @@ class Reserva {
 	
 	/** @Motivo Cliente en su muro, tiene una lista de Estacionamientos que visitÃ³. (los toma de las reservas que fueron creadas) */
 	def static Estacionamiento[] listadoDeEstacionamientosPorCliente(Long idCliente){
-		//TODO Generar vista/sevicio para que llame a este método
+		//TODO Generar vista/sevicio para que llame a este mï¿½todo
 		
 		Estacionamiento[] estacionamientos 
 		
@@ -49,7 +49,7 @@ class Reserva {
 	}
 	
 	def static Usuario[] listadoDeClientesPorEstacionamiento(Long idEstacionamiento){
-	//TODO Generar vista/sevicio para que llame a este método		
+	//TODO Generar vista/sevicio para que llame a este mï¿½todo		
 		
 		Usuario[] usuarios
 		
@@ -71,6 +71,12 @@ class Reserva {
 		
  	}
 	
+	def static getReservasPorEstacionamientoYEstadoPendienteOAceptada(Long idEstacionamiento){
+		Reserva[] reservas = getReservasPorEstacionamientoYClienteYEstado(idEstacionamiento,null,ESTADO_PENDIENTE)	
+		         reservas += getReservasPorEstacionamientoYClienteYEstado(idEstacionamiento,null,ESTADO_ACEPTADA)
+		return reservas	
+	}
+	
 	/**Generalizcion del anterior y algunos siguientes tambien*/
 	def static getReservasPorEstacionamientoYClienteYEstado(Long idEstacionamiento,Long idCliente,String estado){	
 		
@@ -79,10 +85,10 @@ class Reserva {
 			and {
 				if (idEstacionamiento != null)	estacionamiento{	eq('id', idEstacionamiento)}
 				if (idCliente         != null)	usuario{	        eq('id', idCliente)}
-				if (estado            != null)  estado {            eq('estado', estado)}
+				if (estado            != null)  eq('estado', estado)
 				}
 		}
-		return reservas()
+		return reservas
 		
 	}
 
@@ -153,17 +159,18 @@ class Reserva {
 		this.estacionamiento.puntaje = nuevoPuntaje
 	}
 	
-	def aceptar()		{this.estado=ESTADO_ACEPTADA;}
-	def cancelar() 		{this.estado=ESTADO_CANCELADA;}
-	def utilizar() 		{this.estado=ESTADO_UTILIZADA;}
-	def calificarCliente(){this.estado=ESTADO_CALIFICADA_POR_CLIENTE;}
-	def completar() 	{this.estado=ESTADO_COMPLETA;}
+	def aceptar()		{this.estado=ESTADO_ACEPTADA;return this}
+	def cancelar() 		{this.estado=ESTADO_CANCELADA;return this}
+	def utilizar() 		{this.estado=ESTADO_UTILIZADA;return this}
+	def calificarCliente(){this.estado=ESTADO_CALIFICADA_POR_CLIENTE;return this}
+	def completar() 	{this.estado=ESTADO_COMPLETA;return this}
 	def esPendiente() 	{return this.estado==this.ESTADO_PENDIENTE;}
 	def esAceptada() 	{return this.estado==this.ESTADO_ACEPTADA;}
 	def esCancelada() 	{return this.estado==this.ESTADO_CANCELADA;}
 	def esUtilizada() 	{return this.estado==this.ESTADO_UTILIZADA;}
 	def esCalifXCliente(){return this.estado==this.ESTADO_CALIFICADA_POR_CLIENTE;}
 	def esCompleta() 	{return this.estado==this.ESTADO_COMPLETA;}
+
 }
 
 class Calificacion {

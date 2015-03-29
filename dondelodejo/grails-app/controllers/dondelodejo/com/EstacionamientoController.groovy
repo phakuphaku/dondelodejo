@@ -10,6 +10,7 @@ class EstacionamientoController {
 
 	def clienteService
 	def estacionamientoService
+	def reservaService
 	def beforeInterceptor = [action:this.&checkUser,except:['index', 'mostrar', 'listado', 'buscarPorDistancia']]
 	def checkUser() {
 		if(!session.getAttribute("usuario")) {
@@ -142,7 +143,7 @@ class EstacionamientoController {
 		conEstacionamiento { estacionamiento ->
 			LoggerService.Log( "ADMINISTRADOR "+estacionamiento.getId())
 			if (session.getAttribute("usuario").estacionamiento.id==estacionamiento.getId()) 
-				return [estacionamiento:estacionamiento]
+				return [estacionamiento:estacionamiento,listadoReservas:clienteService.listadoReservasParaAdministrador(Long.valueOf(params.get("id")))]
 			else{
 				//nueva parte para no permitir el ingreso a otros estacionamientos
 				session.removeAttribute("usuario")
@@ -157,9 +158,14 @@ class EstacionamientoController {
 		LoggerService.Log( "PERFIL CLIENTE")
 		[listadoReservas:clienteService.listadoReservas(null, Long.valueOf(params.get("id")))]
 	}
-
+	
+	public def aceptarCalificacion(){
+		reservaService.aceptarReserva(Long.valueOf(params.get("id")))
+		redirect action:"administrador", id:session.homeId
+	}
+	
 	def cambiarEstadoCochera () {
-		LoggerService.Log( params)
+		LoggerService.Log(params)
 		def algo
 		if (params["ocupar"])  algo = estacionamientoService.ocuparCochera(Long.valueOf(params["cocheraId"]))
 		if (params["liberar"]) {
