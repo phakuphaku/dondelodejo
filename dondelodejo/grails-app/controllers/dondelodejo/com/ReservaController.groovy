@@ -45,7 +45,7 @@ class ReservaController {
 
 
 	def alta () {
-		LoggerService.Log( params)
+		LoggerService.Log(params)
 		Map reservaIn = [horaDeInicio:new Date(getDateFromDatePicket(params,"horaDeInicio")),
 			//			def reservaIn = [horaDeInicio:new Date(params.get("horaDeInicio")),
 			horasReservadas:params.get("horasReservadas")]

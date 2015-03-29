@@ -10,6 +10,7 @@
 			<span>Ud es un Cliente</span>
 		<a href="./listado">volver al listado</a>		
 		</div>
+		<g:render template="listadoReservasParaCliente"/>
 	</body>
 	
 </html>

@@ -141,13 +141,21 @@ class EstacionamientoController {
 	def administrador () {
 		conEstacionamiento { estacionamiento ->
 			LoggerService.Log( "ADMINISTRADOR "+estacionamiento.getId())
-			[estacionamiento:estacionamiento]
+			if (session.getAttribute("usuario").estacionamiento.id==estacionamiento.getId()) 
+				return [estacionamiento:estacionamiento]
+			else{
+				//nueva parte para no permitir el ingreso a otros estacionamientos
+				session.removeAttribute("usuario")
+				redirect(controller:'login',action:'verificarUsuario')
+				return false
+			}
 		}
 	}
 
 	def	cliente () {
 		//TODO sin codificar. falta tener las altas de estacionamiento hechas
 		LoggerService.Log( "PERFIL CLIENTE")
+		[listadoReservas:clienteService.listadoReservas(null, Long.valueOf(params.get("id")))]
 	}
 
 	def cambiarEstadoCochera () {

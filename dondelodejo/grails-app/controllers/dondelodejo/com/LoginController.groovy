@@ -47,6 +47,7 @@ class LoginController {
 		}
 		if (usuario.esCliente()) {
 			home="cliente"
+			homeId=usuario.id
 		}
 
 		session.home=home

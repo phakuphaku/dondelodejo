@@ -4,7 +4,9 @@ import grails.transaction.Transactional
 
 @Transactional
 class LoggerService {
-	
+	def static Log(Map map) {
+		this.Log(map.toString())
+	}
     def static Log(String aLoguear) {
 		if (loggerEstaActivo()) {
 			println new Date().toString()+" INFO: "+aLoguear
