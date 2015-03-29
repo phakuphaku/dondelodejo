@@ -179,12 +179,20 @@ class BootStrap {
 				cantidadHorasReservadas:2,
 				usuario:2
 				).save();
+		Reserva reserva3 = new Reserva (
+				estacionamiento:1,
+				horaDeInicio: new Date(),
+				cantidadHorasReservadas:2,
+				usuario:2
+				).save();
 
 		Calificacion calificcion1 = new Calificacion(valor:4,detalle:"Todo en orden!");
 		reserva1.calificacionDelClienteAlEstacionamiento=calificcion1
+		reserva1.calificarCliente()
 		reserva1.save()
 		Calificacion calificcion2 = new Calificacion(valor:1,detalle:"Me echaron porque ven�a una caravana de Audis!");
 		reserva2.calificacionDelClienteAlEstacionamiento=calificcion2
+		reserva2.calificarCliente()
 		reserva2.save()
 	}
 
