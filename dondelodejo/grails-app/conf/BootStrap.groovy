@@ -113,11 +113,11 @@ class BootStrap {
 		Estacionamiento estacionamiento8 = new Estacionamiento(nombre:'Edifa',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
 		ubicacion:ubicacion9).save()
 		estacionamiento8.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
-		Ubicacion ubicacion40 = new Ubicacion(direccionStr:"Rinc�n 659",direccionX:-34.6167,direccionY:-58.396122,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
-		Estacionamiento estacionamiento9 = new Estacionamiento(nombre:'Gran Garage Rinc�n',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
+		Ubicacion ubicacion40 = new Ubicacion(direccionStr:"Rinc&oacuten 659",direccionX:-34.6167,direccionY:-58.396122,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
+		Estacionamiento estacionamiento9 = new Estacionamiento(nombre:'Gran Garage Rinc&oacuten',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
 		ubicacion:ubicacion40).save()
 		estacionamiento9.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
-		Ubicacion ubicacion41 = new Ubicacion(direccionStr:"Bartolom� Mitre 2350",direccionX:-34.608532,direccionY:-58.399876,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
+		Ubicacion ubicacion41 = new Ubicacion(direccionStr:"Bartolom&eacute Mitre 2350",direccionX:-34.608532,direccionY:-58.399876,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
 		Estacionamiento estacionamiento10 = new Estacionamiento(nombre:'Sergio C Valente',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
 		ubicacion:ubicacion41).save()
 		estacionamiento10.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
@@ -133,7 +133,7 @@ class BootStrap {
 		Estacionamiento estacionamiento13 = new Estacionamiento(nombre:'Yesiton Sa',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:2,
 		ubicacion:ubicacion44).save()
 		estacionamiento13.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
-		Ubicacion ubicacion45 = new Ubicacion(direccionStr:"Tte. Gral Juan Domingo Per�n 2029",direccionX:-34.607063,direccionY:-58.39545,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
+		Ubicacion ubicacion45 = new Ubicacion(direccionStr:"Tte. Gral Juan Domingo Per&oacuten 2029",direccionX:-34.607063,direccionY:-58.39545,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
 		Estacionamiento estacionamiento14 = new Estacionamiento(nombre:'Garage Sucre Sa',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:3,
 		ubicacion:ubicacion45).save()
 		estacionamiento14.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
@@ -196,9 +196,13 @@ class BootStrap {
 		reserva1.calificacionDelClienteAlEstacionamiento=calificcion1
 		reserva1.calificarCliente()
 		reserva1.save()
-		Calificacion calificcion2 = new Calificacion(valor:1,detalle:"Me echaron porque ven�a una caravana de Audis!");
+		Calificacion calificcion2 = new Calificacion(valor:1,detalle:"Me echaron porque ven&iacutea una caravana de Audis!");
 		reserva2.calificacionDelClienteAlEstacionamiento=calificcion2
 		reserva2.calificarCliente()
+		reserva2.save()
+		Calificacion calificcion3 = new Calificacion(valor:1,detalle:"El Tipo es un pel###### que me colg&oacute 5 veces y quiere que lo felicite");
+		reserva2.calificacionDelEstacionamientoAlCliente=calificcion3
+		reserva2.completar()
 		reserva2.save()
 	}
 
