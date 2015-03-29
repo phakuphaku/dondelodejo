@@ -2,7 +2,9 @@ package dondelodejo.com
 
 class LoginController {
 
-    def index() {[usuario:new Usuario()]}
+	def index() {
+		[usuario:new Usuario()]
+	}
 
 	def usuarioService
 	def login() {
@@ -11,7 +13,8 @@ class LoginController {
 		if (!usuario){
 			flash.message=message(code: 'login.usuario.datosInvalidos')
 			redirect (controller:"login", action:"index")
-		} else {//aca debo decidir cual es el home, y luego enviarlo ahi.
+		} else {
+			//aca debo decidir cual es el home, y luego enviarlo ahi.
 
 			this.setHomeAtSession(usuario)
 
@@ -22,6 +25,7 @@ class LoginController {
 	def home() {
 		redirect (controller:"estacionamiento", action:session.home,id:session.homeId)
 	}
+
 	/**
 	 * Este metodo sera quien decida el home del Usuario. Si es Cliente, su cuenta.
 	 * @param usuario
@@ -31,14 +35,19 @@ class LoginController {
 		String home = "index" //for unknows
 		Long homeId=null
 		if (usuario.esSoporte()) {
-			home="administrador";
-//			homeId=usuario.estacionamiento.id
+			//			home="administrador";
+			home="soporte";
+			//			homeId=usuario.estacionamiento.id
 		}
 		if (usuario.esAdministrador()) {
-			home="operador";
-//			homeId=usuario.estacionamiento.id
+			//			home="operador";
+			home="administrador";
+			homeId=usuario.estacionamiento.id
+			// Validar que el estacionamiento pertenezca al usuario.
 		}
-		if (usuario.esCliente()) {home="cliente"}
+		if (usuario.esCliente()) {
+			home="cliente"
+		}
 
 		session.home=home
 		session.homeId=homeId
@@ -52,14 +61,14 @@ class LoginController {
 
 	def verificarUsuario() {
 		if(!session.usuario) {
-		redirect (controller:"login", action:"index")
+			redirect (controller:"login", action:"index")
 		} //else {
-		  //do nothing
-		  //}
+		//do nothing
+		//}
 	}
 	def verificarTipoUsuario(String s) {
 		if(!session.usuario || session.usuario.tipoUsuario != s) {
-		redirect (controller:"login", action:"index")
+			redirect (controller:"login", action:"index")
 		}
 	}
 }

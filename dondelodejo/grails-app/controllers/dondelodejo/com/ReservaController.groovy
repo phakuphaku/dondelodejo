@@ -92,5 +92,10 @@ class ReservaController {
 			redirect action:"listado"
 		}
 	}
+	
+	public listado() {
+		Reserva[] aux = reservaService.getReservasPorEstacionamientoYClienteYEstado(params)
+		[reservasInstanciaListado: aux , reservaInstanciaTotal: (List)aux.size()]
+	}
 
 }

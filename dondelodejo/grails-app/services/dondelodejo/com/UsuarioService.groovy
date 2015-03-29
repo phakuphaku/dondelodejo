@@ -47,7 +47,6 @@ class UsuarioService {
 		return tipoDeUsuario
 	}
 	def guardarUsuario() {
-
 	}
 	def encriptar(String pass){
 		String passwordToHash = pass;
