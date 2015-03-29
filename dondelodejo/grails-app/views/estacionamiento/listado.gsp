@@ -33,7 +33,7 @@
 			</p>
 		</blockquote>
 
-		<g:render template="listadoTabla"/>
+		<g:render template="listadoTablaEstacionamientos"/>
 	</div>
 
 </body>

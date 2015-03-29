@@ -101,17 +101,6 @@ class BootStrap {
 
 		numCocheras = 1
 
-		Ubicacion ubicacion4 = new Ubicacion(direccionStr:"Rivadavia 502",direccionX:-34.608036,direccionY:-58.373367,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
-		Estacionamiento estacionamiento4 = new Estacionamiento(nombre:'Primer Garage',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
-		ubicacion:ubicacion4).save()
-		estacionamiento4.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
-		Ubicacion ubicacion5 = new Ubicacion(direccionStr:"Boedo 679",direccionX:-34.621124,direccionY:-58.205452,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
-		Estacionamiento estacionamiento5 = new Estacionamiento(nombre:'Segundo Garage',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
-		ubicacion:ubicacion5).save()
-		estacionamiento5.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
-		Ubicacion ubicacion6 = new Ubicacion(direccionStr:"Libertad 1234",direccionX:-34.593887,direccionY:-58.38443,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
-		Estacionamiento estacionamiento6 = new Estacionamiento(nombre:'Tercer Garage',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
-		ubicacion:ubicacion6).save()
 		estacionamiento6.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
 		Ubicacion ubicacion7 = new Ubicacion(direccionStr:"Adolfo Alsina 2551",direccionX:-34.612244,direccionY:-58.402435,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
 		Estacionamiento estacionamiento7 = new Estacionamiento(nombre:'A y M',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
@@ -154,13 +143,6 @@ class BootStrap {
 		ubicacion:ubicacion46).save()
 		estacionamiento15.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
 
-		Usuario usuarioAdmin= new Usuario (
-				nombre:"Soporte",
-				apellido:"Master of the Universe",
-				email:"soporte@soporte.com",
-				contrasenia:usuarioService.encriptar("soporte"),
-				tipoUsuario: Usuario.getAdministrador()
-				).save();
 		Usuario usuarioSoporte= new Usuario (
 				nombre:"Super",
 				apellido:"Soporte",
