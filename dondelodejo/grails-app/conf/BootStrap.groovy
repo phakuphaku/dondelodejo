@@ -101,7 +101,6 @@ class BootStrap {
 
 		numCocheras = 1
 
-		estacionamiento6.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
 		Ubicacion ubicacion7 = new Ubicacion(direccionStr:"Adolfo Alsina 2551",direccionX:-34.612244,direccionY:-58.402435,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
 		Estacionamiento estacionamiento7 = new Estacionamiento(nombre:'A y M',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
 		ubicacion:ubicacion7).save()

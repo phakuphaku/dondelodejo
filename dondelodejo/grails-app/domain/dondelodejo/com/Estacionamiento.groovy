@@ -109,7 +109,7 @@ class Ubicacion {
 		direccionStr	nullable:false
 		direccionX		nullable:true
 		direccionY		nullable:true
-		//poner como default nos ahorrará tiempo de desarrollo
+		//poner como default nos ahorrarï¿½ tiempo de desarrollo
 		barrio			nullable:true
 		localidad		nullable:true,defaultValue:"Capital Federal"
 		provincia		nullable:true
@@ -145,7 +145,7 @@ class Ubicacion {
 			CoordX = resultadoCD.x
 			CoordY = resultadoCD.y
 		} catch (Exception e) {
-			println("Error Codificación geográfica")
+			LoggerService.Log("Error Codificaciï¿½n geogrï¿½fica")
 		}
 		[x:CoordX,y:CoordY]
 	}

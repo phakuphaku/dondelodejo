@@ -37,7 +37,7 @@ class EstacionamientoController {
 
 	//TODO pasar a servicio
 	def guardar () {
-		println "GUARDAR "+params
+		LoggerService.Log("GUARDAR "+params)
 		Estacionamiento estacionamiento = estacionamientoService.alta(params);
 
 		if(estacionamiento != null) {
@@ -54,7 +54,7 @@ class EstacionamientoController {
 	//TODO: El mostrar no debe devolver el objeto. Pasar a Servicio.
 	def mostrar () {
 		conEstacionamiento { estacionamiento ->
-			println "MOSTRAR "+estacionamiento.getId()
+			LoggerService.Log("MOSTRAR "+estacionamiento.getId())
 			Map map = estacionamientoService.cocherasLibres(params)
 			[estacionamiento:map["estacionamiento"],cocherasLibres:map["cantidadCocherasLibres"]]
 		}
@@ -63,15 +63,15 @@ class EstacionamientoController {
 	//TODO: El editar no debe devolver el objeto. Pasar a Servicio.
 	def editar () {
 		conEstacionamiento { estacionamiento ->
-			println "EDITAR "+params
-			println estacionamiento.properties
+			LoggerService.Log( "EDITAR "+params)
+			LoggerService.Log( estacionamiento.properties)
 			[estacionamiento:estacionamiento,id: params.get("id")]
 		}
 	}
 
 	def actualizar () {
 		conEstacionamiento { estacionamiento ->
-			println "ACTUALIZAR "+params
+			LoggerService.Log( "ACTUALIZAR "+params)
 			Estacionamiento e = estacionamientoService.editar(params);
 
 			if(e != null) {
@@ -140,25 +140,25 @@ class EstacionamientoController {
 
 	def administrador () {
 		conEstacionamiento { estacionamiento ->
-			println "ADMINISTRADOR "+estacionamiento.getId()
+			LoggerService.Log( "ADMINISTRADOR "+estacionamiento.getId())
 			[estacionamiento:estacionamiento]
 		}
 	}
 
 	def	cliente () {
 		//TODO sin codificar. falta tener las altas de estacionamiento hechas
-		println "PERFIL CLIENTE"
+		LoggerService.Log( "PERFIL CLIENTE")
 	}
 
 	def cambiarEstadoCochera () {
-		println params
+		LoggerService.Log( params)
 		def algo
 		if (params["ocupar"])  algo = estacionamientoService.ocuparCochera(Long.valueOf(params["cocheraId"]))
 		if (params["liberar"]) {
 			algo = estacionamientoService.liberarCochera(Long.valueOf(params["cocheraId"]))
 			flash.message = estacionamientoService.cobrarCochera(Long.valueOf(params["cocheraId"]))
 		}
-		println "ALGO " + algo
+		LoggerService.Log( "ALGO " + algo)
 		redirect action:"administrador", id:params["estacionamientoId"]
 	}
 

@@ -55,7 +55,7 @@ class Cochera {
 	 * @return Cantidad de cocheras Libres
 	 */
 	static Integer cocherasLibres(Long idEstacionamiento){
-		println "COCHERASLIBRES " + idEstacionamiento
+		LoggerService.Log( "COCHERASLIBRES " + idEstacionamiento)
 		Integer cantidad=0
 		
 		Object[] objArray = Estacionamiento.get(idEstacionamiento).cocheras.toArray()
@@ -82,9 +82,9 @@ class Cochera {
 		Long ocupacion = (this.horaLiberacion.getTime() - this.horaOcupacion.getTime())
 		Long ocupacionMinutos = ocupacion / 60000 //hago pelota los segundo y milisegundos 
 		long diffHoras = ocupacionMinutos / 60
-		println "Horas "+diffHoras
+		LoggerService.Log( "Horas "+diffHoras)
 		long diffMinutos = ocupacionMinutos - (diffHoras*60);
-		println "Minutos "+diffMinutos
+		LoggerService.Log( "Minutos "+diffMinutos)
 		float aCobrarHora = precioCocheraHora * (diffHoras)
 		long fraccionesHorarias =(diffMinutos / FRACCION_HORARIA)
 		float aCobrarFraccion = precioCocheraFraccion * (fraccionesHorarias+1)

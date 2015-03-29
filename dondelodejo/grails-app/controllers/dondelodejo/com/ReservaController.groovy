@@ -28,7 +28,7 @@ class ReservaController {
 			listadoReservas = clienteService.listadoReservas(Long.valueOf(params["id"]), ((Usuario)session.getAttribute("usuario")).id)
 		}
 		def out = [reservaFiltro:reserva,listadoReservas:listadoReservas,estacionamientoId:params["id"]]
-		println out
+		LoggerService.Log( out)
 		out
 	}
 
@@ -38,14 +38,14 @@ class ReservaController {
 				Integer.valueOf(map.get(s+"_day")),
 				Integer.valueOf(map.get(s+"_hour")),
 				Integer.valueOf(map.get(s+"_minute")))
-		println "SE CONVIRTIO A LA FECHA " +fecha
+		LoggerService.Log( "SE CONVIRTIO A LA FECHA " +fecha)
 		return fecha.getTime();
 	}
 
 
 
 	def alta () {
-		println params
+		LoggerService.Log( params)
 		Map reservaIn = [horaDeInicio:new Date(getDateFromDatePicket(params,"horaDeInicio")),
 			//			def reservaIn = [horaDeInicio:new Date(params.get("horaDeInicio")),
 			horasReservadas:params.get("horasReservadas")]

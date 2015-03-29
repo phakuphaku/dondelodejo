@@ -3,7 +3,7 @@ package dondelodejo.com
 class EstacionamientoService {
 	/** Busca UN Estacionamiento */
 	def buscar(Map map) {
-		println "BUSCAR "+map
+		LoggerService.Log( "BUSCAR "+map)
 		if (map.containsKey('id')){
 			Estacionamiento.get(Long.valueOf(map.get("id")))
 		}
@@ -12,7 +12,7 @@ class EstacionamientoService {
 		 */
 	}
 	def buscarReserva(Map map) {
-		println "BUSCAR "+map
+		LoggerService.Log( "BUSCAR "+map)
 		if (map.containsKey('id')){
 			Reserva.get(Long.valueOf(map.get("id")))
 		}
@@ -23,7 +23,7 @@ class EstacionamientoService {
 	/** Busca UN Estacionamiento por id
 	 * @return un map con el estacionamiento, y el numero de cocheras disponibles.*/
 	def cocherasLibres(Map map) {
-		println "BUSCAR "+map
+		LoggerService.Log( "BUSCAR "+map)
 		Estacionamiento e = Estacionamiento.get(Long.valueOf(map.get("id")))
 		//Integer cocherasLibres = Cochera.cocherasLibres(Long.valueOf(map.get("id")))
 		Integer cocherasLibres = e.cantidadCocherasLibres
@@ -84,7 +84,7 @@ class EstacionamientoService {
 		map.putAt("order","DESC")
 		Estacionamiento.list(map)
 	}
-	/** Verifica si es un estacionamiento válido */
+	/** Verifica si es un estacionamiento vï¿½lido */
 	def validar(Estacionamiento e){
 		e.validate()
 	}
