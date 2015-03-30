@@ -160,7 +160,15 @@ class EstacionamientoController {
 	}
 	
 	public def aceptarCalificacion(){
-		reservaService.aceptarReserva(Long.valueOf(params.get("id")))
+		reservaService.cambiarEstado("aceptar",Long.valueOf(params.get("id")))
+		redirect action:"administrador", id:session.homeId
+	}
+	public def cancelarCalificacion(){
+		reservaService.cambiarEstado("cancelar",Long.valueOf(params.get("id")))
+		redirect action:"administrador", id:session.homeId
+	}
+	public def utilizarCalificacion(){
+		reservaService.cambiarEstado("utilizar",Long.valueOf(params.get("id")))
 		redirect action:"administrador", id:session.homeId
 	}
 	
