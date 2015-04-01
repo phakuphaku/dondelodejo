@@ -1,3 +1,11 @@
+<script>
+$(document).ready(function(){
+    $("a.crearCalificacion").click(function(){
+        $("tr.crearCalificacion").fadeToggle(1000);
+    });
+});
+</script>
+
 	<table class="table table-striped table-hover table-clickable">
 		<thead>
 			<tr>
@@ -19,14 +27,47 @@
 				<td>
 					${r.estacionamiento.ubicacion.direccionStr}
 				</td>
-				<td>
-					${r.estado}
-				</td>
-				<g:if test="${r.esUtilizada()}">
-					<td><g:link controller="reserva" action="crearCalificacion"	id="${r.id}">Calificar</g:link></td>
+				<g:if test="${!r.esUtilizada()}">
+					<td colspan="2">
+						${r.estado}
+					</td>
 				</g:if>
-			</tr>
+				<g:else>
+					<td>
+						${r.estado}
+					</td>
+					<td><a class="crearCalificacion" href="#">Calificar Ahora</a></td>
+				</g:else>
+
 				
+			</tr>
+			<g:if test="${r.esUtilizada()}">
+				<tr class="crearCalificacion" style="display:none">
+					<td colspan="5">
+						<table class="table table-striped table-hover table-clickable">
+							<tr>
+								<th>Calificar esta reserva:</th>
+							</tr>
+							<g:form action="calificarReserva">
+							<tr>
+								<td colspan="4">
+								<g:select name="valor" from="${1..5}" value="${valor}" noSelection="['':'-Su Calificación-']"/>	Detalle: <g:textField name="detalle" />
+								</td>
+							</tr>
+							<tr>
+								<td colspan="4">
+										<g:textField style="display:none" name="reservaId" value="${r.id}" />
+										<g:submitButton name="Calificar" class="btn btn-primary btn-xs" value="Calificar" />
+								</td>
+							</tr>
+							</g:form>
+							<!-- Hasta aqui el formulario -->
+						</table>
+					</td>
+				</tr>
+			</g:if>
+			<!-- Hasta aqui la seccion de utilizada -->
+			
 			<!-- TODO Terminar de emprolijar -->
 			<g:if test="${r.esCompleta()}">
 			<tr>

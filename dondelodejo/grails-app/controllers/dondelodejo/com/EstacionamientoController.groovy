@@ -11,6 +11,7 @@ class EstacionamientoController {
 	def clienteService
 	def estacionamientoService
 	def reservaService
+	def usuarioService
 	def beforeInterceptor = [action:this.&checkUser,except:['index', 'mostrar', 'listado', 'buscarPorDistancia']]
 	def checkUser() {
 		if(!session.getAttribute("usuario")) {
@@ -143,7 +144,12 @@ class EstacionamientoController {
 		conEstacionamiento { estacionamiento ->
 			LoggerService.Log( "ADMINISTRADOR "+estacionamiento.getId())
 			if (session.getAttribute("usuario").estacionamiento.id==estacionamiento.getId()) 
-				return [estacionamiento:estacionamiento,listadoReservas:clienteService.listadoReservasParaAdministrador(Long.valueOf(params.get("id")))]
+				return [estacionamiento:estacionamiento,
+						listadoReservas:clienteService.listadoReservasParaAdministrador(
+								Long.valueOf(params.get("id")),
+								session.usuario?.debenMostrarseEstadosCompletados()
+								)
+						]
 			else{
 				//nueva parte para no permitir el ingreso a otros estacionamientos
 				session.removeAttribute("usuario")
@@ -153,12 +159,6 @@ class EstacionamientoController {
 		}
 	}
 
-	def	cliente () {
-		//TODO sin codificar. falta tener las altas de estacionamiento hechas
-		LoggerService.Log( "PERFIL CLIENTE")
-		[listadoReservas:clienteService.listadoReservas(null, Long.valueOf(params.get("id")))]
-	}
-	
 	public def aceptarCalificacion(){
 		reservaService.cambiarEstado("aceptar",Long.valueOf(params.get("id")))
 		redirect action:"administrador", id:session.homeId
@@ -183,5 +183,22 @@ class EstacionamientoController {
 		LoggerService.Log( "ALGO " + algo)
 		redirect action:"administrador", id:params["estacionamientoId"]
 	}
-
+	def calificarReserva(){
+		LoggerService.Log("FP: Calificar Reserva "+params.get("reservaId"))
+		LoggerService.Log(params)
+		
+		Integer resultado_ok=0
+		Integer res = reservaService.calificarReservaPorEstacionamiento(Long.valueOf(params.get("reservaId")), Integer.valueOf(params.get("valor")).intValue(), params.get("detalle"))
+		if (res == resultado_ok){
+			flash.message = "La calificacion se hizo exitosamente"
+			redirect action:session.home, id:session.homeId
+		}
+	}
+	def cambiarEstadoListadoCompleto(){
+		session.usuario=usuarioService.cambiarEstadoListadoCompleto(session.usuario)
+		//TODO ARREGLAR ESTOOOOOOO
+//		session.usuario=Usuario.get(session.usuario.id)
+//		session.usuario.mostrarReservasYaCompletadas=TRUE)
+		redirect action:session.home, id:session.homeId
+	}
 }

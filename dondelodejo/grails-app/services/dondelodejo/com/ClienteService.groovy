@@ -78,8 +78,8 @@ class ClienteService {
 	def Reserva[] listadoReservas (Long idEstacionamiento,Long idUsuario) {
 		return Reserva.listadoPorEstacionamientoYUsuario(idEstacionamiento,idUsuario)
 	}
-	def Reserva[] listadoReservasParaAdministrador (Long idEstacionamiento) {
-		return Reserva.getReservasPorEstacionamientoYEstadoPendienteOAceptada(idEstacionamiento)
+	def Reserva[] listadoReservasParaAdministrador (Long idEstacionamiento,boolean truefalse) {
+		return Reserva.getReservasPorEstacionamientoYEstadosVisiblesParaAdministradores(idEstacionamiento,truefalse)
 	}
 
 }

@@ -3,7 +3,6 @@
 <head>
 <meta name="layout" content="primerLayout" />
 <title>Primer Vista</title>
-
 </head>
 <body>
 	<div id="page-body" role="main">
@@ -26,8 +25,15 @@
 				cocheras.
 			</p>
 		</blockquote>
+<script>
+$(document).ready(function(){
+    $("a.crearCalificacion").click(function(){
+        $("tr.crearCalificacion").fadeToggle(1000);
+    });
+});
+</script>
 		<legend>
-			Reservas:
+			Reservas:(<g:link controller="estacionamiento" action="cambiarEstadoListadoCompleto">Ver/Ocultar Listado Completo</g:link>)
 		</legend>
 		<table class="table table-striped table-hover table-clickable">
 			<thead>
@@ -46,9 +52,16 @@
 					<td>
 						${r.cantidadHorasReservadas}
 					</td>
-					<td>
-						${r.estado}
-					</td>
+					<g:if test="${r.esCompleta()}">
+						<td colspan="3">
+							${r.estado}
+						</td>
+					</g:if>
+					<g:else>
+						<td>
+							${r.estado}
+						</td>
+					</g:else>
 					<g:if test="${r.esPendiente()}">
 						<td><g:link action="aceptarCalificacion"	id="${r.id}">Aceptar</g:link></td>
 						<td><g:link action="cancelarCalificacion"	id="${r.id}">Cancelar</g:link></td>
@@ -56,9 +69,36 @@
 					<g:if test="${r.esAceptada()}">
 						<td colspan="2"><g:link action="utilizarCalificacion"	id="${r.id}">Marcar como utilizada</g:link></td>
 					</g:if>
+					<g:if test="${r.esCalifXCliente()}">
+						<td colspan="2"><a class="crearCalificacion" href="#">Calificar Ahora</a></td>
+					</g:if>
 				</tr>
+				<g:if test="${r.esCalifXCliente()}">
+				<tr class="crearCalificacion" style="display:none">
+					<td colspan="5">
+						<table class="table table-striped table-hover table-clickable">
+							<tr>
+								<th>Calificar esta reserva:</th>
+							</tr>
+							<g:form action="calificarReserva">
+							<tr>
+								<td colspan="4">
+								<g:select name="valor" from="${1..5}" value="${valor}" noSelection="['':'-Su Calificación-']"/>	Detalle: <g:textField name="detalle" />
+								</td>
+							</tr>
+							<tr>
+								<td colspan="4">
+										<g:textField style="display:none" name="reservaId" value="${r.id}" />
+										<g:submitButton name="Calificar" class="btn btn-primary btn-xs" value="Calificar" />
+								</td>
+							</tr>
+							</g:form>
+							<!-- Hasta aqui el formulario -->
+						</table>
+					</td>
+				</tr>
+				</g:if>
 					
-				<!-- TODO Terminar de emprolijar -->
 				<g:if test="${r.esCompleta()}">
 				<tr>
 					<td colspan="5">

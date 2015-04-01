@@ -69,4 +69,17 @@ class UsuarioService {
 		generatedPassword = sb.toString();
 		return generatedPassword
 	}
+	// TODO BORRAR PRUEBA TEMPORAL*/
+	def cambiarEstadoListadoCompleto(Long usuarioId){
+		Usuario usuario=Usuario.get(usuarioId)
+		if (usuario.debenMostrarseEstadosCompletados()) usuario.setMostrarEstadosCompletados(false)
+		else usuario.setMostrarEstadosCompletados(true)
+		return true
+	}
+	def cambiarEstadoListadoCompleto(Usuario usuario){
+		if (usuario.debenMostrarseEstadosCompletados()) usuario.setMostrarEstadosCompletados(false)
+		else usuario.setMostrarEstadosCompletados(true)
+		return usuario
+	}
+	
 }

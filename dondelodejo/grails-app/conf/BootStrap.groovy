@@ -164,7 +164,8 @@ class BootStrap {
 				email:"admin1@admin1.com",
 				contrasenia:usuarioService.encriptar("admin1"),
 				tipoUsuario: Usuario.getAdministrador(),
-				estacionamiento: estacionamiento1
+				estacionamiento: estacionamiento1,
+				mostrarReservasYaCompletadas: true
 				).save();
 
 		Reserva reserva1 = new Reserva (

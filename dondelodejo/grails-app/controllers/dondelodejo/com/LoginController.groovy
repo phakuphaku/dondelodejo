@@ -19,11 +19,11 @@ class LoginController {
 			this.setHomeAtSession(usuario)
 
 			session.usuario = usuario
-			redirect (controller:"estacionamiento", action:session.home,id:session.homeId)
+			redirect (controller:session.homeController, action:session.home,id:session.homeId)
 		}
 	}
 	def home() {
-		redirect (controller:"estacionamiento", action:session.home,id:session.homeId)
+		redirect (controller:session.homeController, action:session.home,id:session.homeId)
 	}
 
 	/**
@@ -33,9 +33,11 @@ class LoginController {
 	 */
 	void setHomeAtSession (Usuario usuario) {
 		String home = "index" //for unknows
+		String homeController="estacionamiento"
 		Long homeId=null
 		if (usuario.esSoporte()) {
 			//			home="administrador";
+			homeController=""
 			home="soporte";
 			//			homeId=usuario.estacionamiento.id
 		}
@@ -46,10 +48,12 @@ class LoginController {
 			// Validar que el estacionamiento pertenezca al usuario.
 		}
 		if (usuario.esCliente()) {
+			homeController="reserva"
 			home="cliente"
 			homeId=usuario.id
 		}
 
+		session.homeController=homeController
 		session.home=home
 		session.homeId=homeId
 

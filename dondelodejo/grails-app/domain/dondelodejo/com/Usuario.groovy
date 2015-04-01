@@ -24,6 +24,7 @@ class Usuario {
 	String 			contrasenia
 	String			tipoUsuario
 	Estacionamiento estacionamiento
+	boolean 		mostrarReservasYaCompletadas=false
 
 	static hasMany = [reservas:Reserva]
 
@@ -50,5 +51,11 @@ class Usuario {
 	String toString(){
 		//		"Usuario: "+this.email+" Tipo: "+this.tipoUsuario
 		this.nombre+" "+this.apellido+" ("+this.tipoUsuario+")"
+	}
+	public boolean debenMostrarseEstadosCompletados() {
+		return mostrarReservasYaCompletadas;
+	}
+	public void setMostrarEstadosCompletados(boolean truefalse) {
+		this.mostrarReservasYaCompletadas = truefalse;
 	}
 }

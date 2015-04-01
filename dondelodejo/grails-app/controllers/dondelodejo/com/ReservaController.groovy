@@ -6,6 +6,7 @@ class ReservaController {
 	def clienteService //aqui debe ponerse los metodos
 	def usuarioService //para validaciones eventuales
 	def estacionamientoService //para listar las reservas
+	def reservaService
 	def beforeInterceptor = [action:this.&checkUser,except:[]]
 	def checkUser() {
 		if(!session.getAttribute("usuario")) {
@@ -97,5 +98,21 @@ class ReservaController {
 		Reserva[] aux = reservaService.getReservasPorEstacionamientoYClienteYEstado(params)
 		[reservasInstanciaListado: aux , reservaInstanciaTotal: (List)aux.size()]
 	}
-
+	
+	def	cliente () {
+		//TODO sin codificar. falta tener las altas de estacionamiento hechas
+		LoggerService.Log( "PERFIL CLIENTE")
+		[listadoReservas:clienteService.listadoReservas(null, Long.valueOf(params.get("id")))]
+	}
+	def calificarReserva(){
+		LoggerService.Log("FP: Calificar Reserva "+params.get("reservaId"))
+		LoggerService.Log(params)
+		
+		Integer resultado_ok=0
+		Integer res = reservaService.calificarReservaPorCliente(Long.valueOf(params.get("reservaId")), Integer.valueOf(params.get("valor")).intValue(), params.get("detalle"))   
+        if (res == resultado_ok){
+			flash.message = "La calificacion se hizo exitosamente"
+			redirect action:"cliente", id:params.get("reservaId")
+        }
+	}
 }

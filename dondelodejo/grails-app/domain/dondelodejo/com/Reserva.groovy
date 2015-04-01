@@ -71,6 +71,24 @@ class Reserva {
 		
  	}
 	
+	def static getReservasPorEstacionamientoYEstadosVisiblesParaAdministradores(Long idEstacionamiento,boolean debenMostrarseEstadosCompletados){
+		def criteria = Reserva.createCriteria()
+		def reservas = criteria.list {
+			if (idEstacionamiento != null)	estacionamiento{	eq('id', idEstacionamiento)}
+			or {
+				eq('estado', ESTADO_PENDIENTE)
+				eq('estado', ESTADO_ACEPTADA)
+				eq('estado', ESTADO_CALIFICADA_POR_CLIENTE)
+				if (debenMostrarseEstadosCompletados){
+					  eq('estado', ESTADO_COMPLETA)
+					  eq('estado', ESTADO_UTILIZADA)
+					  eq('estado', ESTADO_CANCELADA)
+				}
+			}
+		}
+		return reservas	
+	}
+	
 	def static getReservasPorEstacionamientoYEstadoPendienteOAceptada(Long idEstacionamiento){
 		Reserva[] reservas = getReservasPorEstacionamientoYClienteYEstado(idEstacionamiento,null,ESTADO_PENDIENTE)	
 		         reservas += getReservasPorEstacionamientoYClienteYEstado(idEstacionamiento,null,ESTADO_ACEPTADA)
@@ -143,17 +161,22 @@ class Reserva {
 //		return results
 //	}
 	
-	def calificaClienteAlEstacionamiento (int valor, char detalle){
+	def calificaClienteAlEstacionamiento (int valor, String detalle){
 
 		this.calificacionDelClienteAlEstacionamiento = new Calificacion(["valor":valor, "detalle":detalle])
+		this.calificarCliente()
 		recalcularPuntajeEstacionamiento(valor)
+		this
 	}
-	def calificaEstacionamientoAlCliente(int valor, char detalle){
+	def calificaEstacionamientoAlCliente(int valor, String detalle){
 		this.calificacionDelEstacionamientoAlCliente = new Calificacion(["valor":valor, "detalle":detalle])
+		this.completar()
+		this
 	}
 
 	private recalcularPuntajeEstacionamiento(int valor) {
-		int cantidad = Reserva.findByEstacionamientoAndEstado(this.estacionamiento.id,"Calificada").size()+1
+		//TODO FACUNDO. No tengo idea que es el Lockeo pesimista Averiguar por que esto es necesario?
+		int cantidad = Reserva.findAllByEstacionamientoAndEstado(this.estacionamiento,ESTADO_CALIFICADA_POR_CLIENTE, [lock: true]).size()+1
 		int puntaje = this.estacionamiento.puntaje
 		def nuevoPuntaje = (puntaje + valor)/cantidad
 		this.estacionamiento.puntaje = nuevoPuntaje
