@@ -176,9 +176,10 @@ class Reserva {
 
 	private recalcularPuntajeEstacionamiento(int valor) {
 		//TODO FACUNDO. No tengo idea que es el Lockeo pesimista Averiguar por que esto es necesario?
-		int cantidad = Reserva.findAllByEstacionamientoAndEstado(this.estacionamiento,ESTADO_CALIFICADA_POR_CLIENTE, [lock: true]).size()+1
+		int cantidad = Reserva.findAllByEstacionamientoAndEstado(this.estacionamiento,ESTADO_CALIFICADA_POR_CLIENTE, [lock: true]).size()
+		cantidad += Reserva.findAllByEstacionamientoAndEstado(this.estacionamiento,ESTADO_COMPLETA, [lock: true]).size()
 		int puntaje = this.estacionamiento.puntaje
-		def nuevoPuntaje = (puntaje + valor)/cantidad
+		Float nuevoPuntaje = this.redondear((puntaje + valor)/cantidad)
 		this.estacionamiento.puntaje = nuevoPuntaje
 	}
 	
@@ -194,6 +195,10 @@ class Reserva {
 	def esCalifXCliente(){return this.estado==this.ESTADO_CALIFICADA_POR_CLIENTE;}
 	def esCompleta() 	{return this.estado==this.ESTADO_COMPLETA;}
 
+	public Float redondear( Float numero) {
+		int decimales=2;
+	    return (Math.round((numero)*Math.pow(10,decimales))/Math.pow(10,decimales));
+	}
 }
 
 class Calificacion {

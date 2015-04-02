@@ -25,15 +25,8 @@
 				cocheras.
 			</p>
 		</blockquote>
-<script>
-$(document).ready(function(){
-    $("a.crearCalificacion").click(function(){
-        $("tr.crearCalificacion").fadeToggle(1000);
-    });
-});
-</script>
 		<legend>
-			Reservas:(<g:link controller="estacionamiento" action="cambiarEstadoListadoCompleto">Ver/Ocultar Listado Completo</g:link>)
+			Reservas: (<g:link controller="estacionamiento" action="cambiarEstadoListadoCompleto">Ver/Ocultar Listado Completo</g:link>)
 		</legend>
 		<table class="table table-striped table-hover table-clickable">
 			<thead>
@@ -52,7 +45,7 @@ $(document).ready(function(){
 					<td>
 						${r.cantidadHorasReservadas}
 					</td>
-					<g:if test="${r.esCompleta()}">
+					<g:if test="${r.esCompleta() || r.esUtilizada()}">
 						<td colspan="3">
 							${r.estado}
 						</td>
@@ -70,11 +63,18 @@ $(document).ready(function(){
 						<td colspan="2"><g:link action="utilizarCalificacion"	id="${r.id}">Marcar como utilizada</g:link></td>
 					</g:if>
 					<g:if test="${r.esCalifXCliente()}">
-						<td colspan="2"><a class="crearCalificacion" href="#">Calificar Ahora</a></td>
+						<td colspan="2"><a class="crearCalificacion${r.id}" href="#">Calificar Ahora</a></td>
+						<script>
+						$(document).ready(function(){
+						    $('a.crearCalificacion${r.id}').click(function(){
+						        $('tr.crearCalificacion${r.id}').fadeToggle(1000);
+						    });
+						});
+						</script>
 					</g:if>
 				</tr>
 				<g:if test="${r.esCalifXCliente()}">
-				<tr class="crearCalificacion" style="display:none">
+				<tr class="crearCalificacion${r.id}" style="display:none">
 					<td colspan="5">
 						<table class="table table-striped table-hover table-clickable">
 							<tr>

@@ -195,10 +195,8 @@ class EstacionamientoController {
 		}
 	}
 	def cambiarEstadoListadoCompleto(){
-		session.usuario=usuarioService.cambiarEstadoListadoCompleto(session.usuario)
 		//TODO ARREGLAR ESTOOOOOOO
-//		session.usuario=Usuario.get(session.usuario.id)
-//		session.usuario.mostrarReservasYaCompletadas=TRUE)
+		session.usuario=usuarioService.cambiarEstadoListadoCompleto(session.usuario)
 		redirect action:session.home, id:session.homeId
 	}
 }

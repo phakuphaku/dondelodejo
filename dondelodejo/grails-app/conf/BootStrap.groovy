@@ -26,7 +26,7 @@ class BootStrap {
 				descripcion:"Una linda esquina",
 				fechaAlta:new Date(),
 				numCocheras:numCocheras,
-				puntaje:5,
+				puntaje:0,
 				ubicacion:ubicacion1
 				).save()
 
@@ -56,7 +56,7 @@ class BootStrap {
 				descripcion:"Donde estacionas de todo",
 				fechaAlta:new Date(),
 				numCocheras:numCocheras,
-				puntaje:3,
+				puntaje:0,
 				ubicacion:ubicacion2).save()
 
 		Cochera cochera2
@@ -102,43 +102,43 @@ class BootStrap {
 		numCocheras = 1
 
 		Ubicacion ubicacion7 = new Ubicacion(direccionStr:"Adolfo Alsina 2551",direccionX:-34.612244,direccionY:-58.402435,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
-		Estacionamiento estacionamiento7 = new Estacionamiento(nombre:'A y M',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
+		Estacionamiento estacionamiento7 = new Estacionamiento(nombre:'A y M',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:0,
 		ubicacion:ubicacion7).save()
 		estacionamiento7.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
 		Ubicacion ubicacion8 = new Ubicacion(direccionStr:"Sarmiento 2265",direccionX:-34.60604,direccionY:-58.39886,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
-		Estacionamiento estacionamiento71 = new Estacionamiento(nombre:'PRESLY',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
+		Estacionamiento estacionamiento71 = new Estacionamiento(nombre:'PRESLY',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:0,
 		ubicacion:ubicacion8).save()
 		estacionamiento71.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
 		Ubicacion ubicacion9 = new Ubicacion(direccionStr:"Larrea 257",direccionX:-34.606785,direccionY:-58.402,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
-		Estacionamiento estacionamiento8 = new Estacionamiento(nombre:'Edifa',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
+		Estacionamiento estacionamiento8 = new Estacionamiento(nombre:'Edifa',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:0,
 		ubicacion:ubicacion9).save()
 		estacionamiento8.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
 		Ubicacion ubicacion40 = new Ubicacion(direccionStr:"Rinc&oacuten 659",direccionX:-34.6167,direccionY:-58.396122,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
-		Estacionamiento estacionamiento9 = new Estacionamiento(nombre:'Gran Garage Rinc&oacuten',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
+		Estacionamiento estacionamiento9 = new Estacionamiento(nombre:'Gran Garage Rinc&oacuten',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:0,
 		ubicacion:ubicacion40).save()
 		estacionamiento9.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
 		Ubicacion ubicacion41 = new Ubicacion(direccionStr:"Bartolom&eacute Mitre 2350",direccionX:-34.608532,direccionY:-58.399876,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
-		Estacionamiento estacionamiento10 = new Estacionamiento(nombre:'Sergio C Valente',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
+		Estacionamiento estacionamiento10 = new Estacionamiento(nombre:'Sergio C Valente',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:0,
 		ubicacion:ubicacion41).save()
 		estacionamiento10.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
 		Ubicacion ubicacion42 = new Ubicacion(direccionStr:"Viamonte 2244",direccionX:-34.601105,direccionY:-58.399113,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
-		Estacionamiento estacionamiento11 = new Estacionamiento(nombre:'Garage Viamonte',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
+		Estacionamiento estacionamiento11 = new Estacionamiento(nombre:'Garage Viamonte',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:0,
 		ubicacion:ubicacion42).save()
 		estacionamiento11.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
 		Ubicacion ubicacion43 = new Ubicacion(direccionStr:"Bartolome Mitre 2374",direccionX:-34.60855,direccionY:-58.400192,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
-		Estacionamiento estacionamiento12 = new Estacionamiento(nombre:'San Expedito',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:1,
+		Estacionamiento estacionamiento12 = new Estacionamiento(nombre:'San Expedito',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:0,
 		ubicacion:ubicacion43).save()
 		estacionamiento12.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
 		Ubicacion ubicacion44 = new Ubicacion(direccionStr:"Av Rivadavia 2151",direccionX:-34.609528,direccionY:-58.396954,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
-		Estacionamiento estacionamiento13 = new Estacionamiento(nombre:'Yesiton Sa',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:2,
+		Estacionamiento estacionamiento13 = new Estacionamiento(nombre:'Yesiton Sa',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:0,
 		ubicacion:ubicacion44).save()
 		estacionamiento13.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
 		Ubicacion ubicacion45 = new Ubicacion(direccionStr:"Tte. Gral Juan Domingo Per&oacuten 2029",direccionX:-34.607063,direccionY:-58.39545,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
-		Estacionamiento estacionamiento14 = new Estacionamiento(nombre:'Garage Sucre Sa',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:3,
+		Estacionamiento estacionamiento14 = new Estacionamiento(nombre:'Garage Sucre Sa',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:0,
 		ubicacion:ubicacion45).save()
 		estacionamiento14.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
 		Ubicacion ubicacion46 = new Ubicacion(direccionStr:"Boulogne Sur Mer 342",direccionX:-34.60613,direccionY:-58.40721,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
-		Estacionamiento estacionamiento15 = new Estacionamiento(nombre:'Garage Once S',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:4,
+		Estacionamiento estacionamiento15 = new Estacionamiento(nombre:'Garage Once S',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:0,
 		ubicacion:ubicacion46).save()
 		estacionamiento15.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
 
@@ -167,7 +167,7 @@ class BootStrap {
 				estacionamiento: estacionamiento1,
 				mostrarReservasYaCompletadas: true
 				).save();
-
+/*
 		Reserva reserva1 = new Reserva (
 				estacionamiento:1,
 				horaDeInicio: new Date(),
@@ -204,7 +204,7 @@ class BootStrap {
 		Calificacion calificcion3 = new Calificacion(valor:1,detalle:"El Tipo es un pel###### que me colg&oacute 5 veces y quiere que lo felicite");
 		reserva2.calificacionDelEstacionamientoAlCliente=calificcion3
 		reserva2.completar()
-		reserva2.save()
+		reserva2.save()*/
 	}
 
 	def destroy = {

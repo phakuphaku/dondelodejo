@@ -51,7 +51,7 @@
 	</table>
 	--%>
 
-	<div id="page-body" role="main">
+	<div id="page-body" role="main" align="center">
 		<center>
 			<g:form class="formulario" action="alta">
 				<div class="background" />
@@ -66,18 +66,19 @@
 					<!--<g:textField name="horaDeInicio" value="${reservaFiltro?.horaDeInicio}"/>-->
 				</div>
 				<div>
-					<label for="horasReservadas">Horas que quiere reservar:</label>
-					<g:textField name="horasReservadas"
+					<label for="cantidadHorasReservadas">Horas que quiere reservar:</label>
+					<g:textField name="cantidadHorasReservadas"
 						value="${reservaFiltro?.cantidadHorasReservadas}" />
 				</div>
 				<div id="submit">
 					<g:submitButton name="crear" value="Crear la Reserva" />
 				</div>
+				</div>
 			</g:form>
 		</center>
 	</div>
 
-	<legend>Historial de reservas</legend>
+	<legend>Historial de reservas  (<g:link controller="usuario" action="cambiarEstadoListadoCompleto">Ver/Ocultar Listado Completo</g:link>)</legend>
 
 	<g:render template="listadoReservasParaCliente"/>
 

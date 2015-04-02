@@ -49,7 +49,7 @@ class ReservaController {
 		LoggerService.Log(params)
 		Map reservaIn = [horaDeInicio:new Date(getDateFromDatePicket(params,"horaDeInicio")),
 			//			def reservaIn = [horaDeInicio:new Date(params.get("horaDeInicio")),
-			horasReservadas:params.get("horasReservadas")]
+			cantidadHorasReservadas:params.get("cantidadHorasReservadas")]
 		def reservaOut = clienteService.crearReserva(  [reserva:reservaIn,
 			estacionamientoId:params["estacionamientoId"],
 			usuario:session.getAttribute("usuario")])
@@ -112,7 +112,7 @@ class ReservaController {
 		Integer res = reservaService.calificarReservaPorCliente(Long.valueOf(params.get("reservaId")), Integer.valueOf(params.get("valor")).intValue(), params.get("detalle"))   
         if (res == resultado_ok){
 			flash.message = "La calificacion se hizo exitosamente"
-			redirect action:"cliente", id:params.get("reservaId")
+			redirect action:session.home, id:session.homeId
         }
 	}
 }

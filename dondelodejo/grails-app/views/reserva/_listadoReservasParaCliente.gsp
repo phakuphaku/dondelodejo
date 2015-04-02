@@ -1,10 +1,3 @@
-<script>
-$(document).ready(function(){
-    $("a.crearCalificacion").click(function(){
-        $("tr.crearCalificacion").fadeToggle(1000);
-    });
-});
-</script>
 
 	<table class="table table-striped table-hover table-clickable">
 		<thead>
@@ -36,13 +29,20 @@ $(document).ready(function(){
 					<td>
 						${r.estado}
 					</td>
-					<td><a class="crearCalificacion" href="#">Calificar Ahora</a></td>
+					<td><a class="crearCalificacion${r.id}" href="#">Calificar Ahora</a></td>
+					<script>
+					$(document).ready(function(){
+					    $("a.crearCalificacion${r.id}").click(function(){
+					        $("tr.crearCalificacion${r.id}").fadeToggle(1000);
+					    });
+					});
+					</script>
 				</g:else>
 
 				
 			</tr>
 			<g:if test="${r.esUtilizada()}">
-				<tr class="crearCalificacion" style="display:none">
+				<tr class="crearCalificacion${r.id}" style="display:none">
 					<td colspan="5">
 						<table class="table table-striped table-hover table-clickable">
 							<tr>
