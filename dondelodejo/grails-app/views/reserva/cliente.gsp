@@ -10,6 +10,9 @@
 			<span>Ud es un Cliente, Sea Bienvenido a DondeLoDejo</span>
 		<g:link controller="estacionamiento" action="listado">volver al listado</g:link>	
 		</div>
+		<legend>
+			Reservas: (<g:link controller="reserva" action="cambiarEstadoListadoCompleto">Ver/Ocultar Listado Completo</g:link>)
+		</legend>
 		<g:render template="listadoReservasParaCliente"/>
 	</body>
 	

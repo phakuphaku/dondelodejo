@@ -149,28 +149,31 @@ class Reserva {
 		}
 		return results
 	}
-	
-	//TODO Este metodo se puede eliminar haciendo dinamica la query anterior
-//	/** En su muro debe ver las reservas que tiene pendientes para poder aceptarlas o cancelarlas. */
-//	def static listadoPorEstacionamiento(Long idEstacionamiento){
-//		def criteria = Reserva.createCriteria()
-//		def results = criteria.list {
-//			estacionamiento{	eq('id', idEstacionamiento)}
-//			order("horaDeInicio", "ASC")
-//		}
-//		return results
-//	}
+	/** @params si son null se anula ese filtro */
+	def static listadoPorEstacionamientoYUsuarioYEstadosVisiblesParaClientes(Long idEstacionamiento,Long idCliente,boolean debenMostrarseEstadosOcultos){
+		def criteria = Reserva.createCriteria()
+		def results = criteria.list {
+			and {
+				if (idEstacionamiento != null)	estacionamiento{	eq('id', idEstacionamiento)}
+				if (idCliente         != null)	usuario{	        eq('id', idCliente)}
+				if (!debenMostrarseEstadosOcultos){				eq('estado', ESTADO_UTILIZADA)}
+				}
+			order("horaDeInicio", "ASC")
+		}
+		return results
+	}
 	
 	def calificaClienteAlEstacionamiento (int valor, String detalle){
-
 		this.calificacionDelClienteAlEstacionamiento = new Calificacion(["valor":valor, "detalle":detalle])
 		this.calificarCliente()
+		this.save(flush:true)
 		recalcularPuntajeEstacionamiento(valor)
 		this
 	}
 	def calificaEstacionamientoAlCliente(int valor, String detalle){
 		this.calificacionDelEstacionamientoAlCliente = new Calificacion(["valor":valor, "detalle":detalle])
 		this.completar()
+		this.save(flush:true)
 		this
 	}
 
@@ -181,6 +184,7 @@ class Reserva {
 		int puntaje = this.estacionamiento.puntaje
 		Float nuevoPuntaje = this.redondear((puntaje + valor)/cantidad)
 		this.estacionamiento.puntaje = nuevoPuntaje
+		this.estacionamiento.save(flush:true)
 	}
 	
 	def aceptar()		{this.estado=ESTADO_ACEPTADA;return this}
@@ -202,13 +206,10 @@ class Reserva {
 }
 
 class Calificacion {
-	
 		Integer valor
 		String detalle
-	
 		static constraints = {
 			valor 	 	    nullable : false, inList:[1, 2, 3, 4, 5]
 			detalle 	    nullable : true
 		}
-	
 	}

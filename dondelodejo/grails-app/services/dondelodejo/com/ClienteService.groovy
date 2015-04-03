@@ -30,18 +30,6 @@ class ClienteService {
 		float desdeY = coord.get("y") - tolerancia
 		float hastaY = coord.get("y") + tolerancia
 
-		/*TODO CRITERIA RESUELTO. Dejo el codigo VIEJO de muestra para REFERENCIA futura. */
-		/*	Estacionamiento.findAll(
-				"from Estacionamiento as e "+
-				"where (e.ubicacion.direccionX between ? AND ? ) "+
-				"AND (e.ubicacion.direccionY between ? AND ?) order by puntaje desc",
-				[
-					desdeX,
-					hastaX,
-					desdeY,
-					hastaY
-				])*/
-		
 		def c = Estacionamiento.createCriteria()
 		def results = c.list {
 			
@@ -75,8 +63,11 @@ class ClienteService {
 		LoggerService.Log("RESERVA ACEPTADA")
 		return reserva.id
 	}
-	def Reserva[] listadoReservas (Long idEstacionamiento,Long idUsuario) {
-		return Reserva.listadoPorEstacionamientoYUsuario(idEstacionamiento,idUsuario)
+	def Reserva[] listadoReservas (Long idEstacionamiento,Long idUsuario,boolean bool) {
+		return Reserva.listadoPorEstacionamientoYUsuario(idEstacionamiento,idUsuario,bool)
+	}
+	def Reserva[] listadoReservasParaClientes (Long idEstacionamiento,Long idUsuario,boolean bool) {
+		return Reserva.listadoPorEstacionamientoYUsuarioYEstadosVisiblesParaClientes(idEstacionamiento,idUsuario,bool)
 	}
 	def Reserva[] listadoReservasParaAdministrador (Long idEstacionamiento,boolean truefalse) {
 		return Reserva.getReservasPorEstacionamientoYEstadosVisiblesParaAdministradores(idEstacionamiento,truefalse)

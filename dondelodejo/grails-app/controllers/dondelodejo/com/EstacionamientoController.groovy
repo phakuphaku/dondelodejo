@@ -133,13 +133,6 @@ class EstacionamientoController {
 		}
 	}
 
-	//	def operador () {
-	//		conEstacionamiento { estacionamiento ->
-	//			println "OPERADOR "+estacionamiento.getId()
-	//			[estacionamiento:estacionamiento]
-	//		}
-	//	}
-
 	def administrador () {
 		conEstacionamiento { estacionamiento ->
 			LoggerService.Log( "ADMINISTRADOR "+estacionamiento.getId())
@@ -188,14 +181,17 @@ class EstacionamientoController {
 		LoggerService.Log(params)
 		
 		Integer resultado_ok=0
-		Integer res = reservaService.calificarReservaPorEstacionamiento(Long.valueOf(params.get("reservaId")), Integer.valueOf(params.get("valor")).intValue(), params.get("detalle"))
+		Integer res = reservaService.calificarReserva(
+			Long.valueOf(session.usuario.id),
+			Long.valueOf(params.get("reservaId")), 
+			Integer.valueOf(params.get("valor")).intValue(), 
+			params.get("detalle"))
 		if (res == resultado_ok){
 			flash.message = "La calificacion se hizo exitosamente"
 			redirect action:session.home, id:session.homeId
 		}
 	}
 	def cambiarEstadoListadoCompleto(){
-		//TODO ARREGLAR ESTOOOOOOO
 		session.usuario=usuarioService.cambiarEstadoListadoCompleto(session.usuario)
 		redirect action:session.home, id:session.homeId
 	}

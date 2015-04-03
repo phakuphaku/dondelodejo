@@ -167,7 +167,7 @@ class BootStrap {
 				estacionamiento: estacionamiento1,
 				mostrarReservasYaCompletadas: true
 				).save();
-/*
+
 		Reserva reserva1 = new Reserva (
 				estacionamiento:1,
 				horaDeInicio: new Date(),
@@ -193,7 +193,7 @@ class BootStrap {
 				usuario:2
 				).save();
 
-		Calificacion calificcion1 = new Calificacion(valor:4,detalle:"Todo en orden!");
+		/*Calificacion calificcion1 = new Calificacion(valor:4,detalle:"Todo en orden!");
 		reserva1.calificacionDelClienteAlEstacionamiento=calificcion1
 		reserva1.calificarCliente()
 		reserva1.save()

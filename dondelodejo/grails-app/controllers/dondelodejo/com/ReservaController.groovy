@@ -102,17 +102,25 @@ class ReservaController {
 	def	cliente () {
 		//TODO sin codificar. falta tener las altas de estacionamiento hechas
 		LoggerService.Log( "PERFIL CLIENTE")
-		[listadoReservas:clienteService.listadoReservas(null, Long.valueOf(params.get("id")))]
+		[listadoReservas:clienteService.listadoReservasParaClientes(null, Long.valueOf(params.get("id")),session.usuario?.debenMostrarseEstadosCompletados())]
 	}
 	def calificarReserva(){
 		LoggerService.Log("FP: Calificar Reserva "+params.get("reservaId"))
 		LoggerService.Log(params)
 		
 		Integer resultado_ok=0
-		Integer res = reservaService.calificarReservaPorCliente(Long.valueOf(params.get("reservaId")), Integer.valueOf(params.get("valor")).intValue(), params.get("detalle"))   
+		Integer res = reservaService.calificarReserva(
+			Long.valueOf(session.usuario.id),
+			Long.valueOf(params.get("reservaId")), 
+			Integer.valueOf(params.get("valor")).intValue(), 
+			params.get("detalle"))   
         if (res == resultado_ok){
 			flash.message = "La calificacion se hizo exitosamente"
 			redirect action:session.home, id:session.homeId
         }
+	}
+	def cambiarEstadoListadoCompleto(){
+		session.usuario=usuarioService.cambiarEstadoListadoCompleto(session.usuario)
+		redirect action:session.home, id:session.homeId
 	}
 }

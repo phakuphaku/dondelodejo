@@ -58,4 +58,16 @@ class Usuario {
 	public void setMostrarEstadosCompletados(boolean truefalse) {
 		this.mostrarReservasYaCompletadas = truefalse;
 	}
+	def static Usuario getById(Long id){
+		Usuario u=Usuario.get(id)
+		if (u.tipoUsuario==getCliente()){
+			return new Cliente(u.properties)
+		}
+		if (u.tipoUsuario==getAdministrador()){
+			return new Administrador(u.properties)
+		}
+		if (u.tipoUsuario==getSoporte()){
+			return new Usuario() //TODO para este camino esta situacion no esta definida.
+		}
+	}
 }
