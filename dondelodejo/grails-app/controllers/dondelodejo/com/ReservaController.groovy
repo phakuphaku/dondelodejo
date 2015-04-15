@@ -3,7 +3,6 @@ import dondelodejo.com.Reserva
 
 class ReservaController {
 
-	def clienteService //aqui debe ponerse los metodos
 	def usuarioService //para validaciones eventuales
 	def estacionamientoService //para listar las reservas
 	def reservaService
@@ -26,7 +25,7 @@ class ReservaController {
 		Reserva[] listadoReservas=null
 		if (params["id"]){
 			//hago la busqueda para encontrar las reservas ya hechas.
-			listadoReservas = clienteService.listadoReservas(Long.valueOf(params["id"]), ((Usuario)session.getAttribute("usuario")).id)
+			listadoReservas = reservaService.listadoReservas(Long.valueOf(params["id"]), ((Usuario)session.getAttribute("usuario")).id)
 		}
 		def out = [reservaFiltro:reserva,listadoReservas:listadoReservas,estacionamientoId:params["id"]]
 		LoggerService.Log( out)
@@ -50,7 +49,7 @@ class ReservaController {
 		Map reservaIn = [horaDeInicio:new Date(getDateFromDatePicket(params,"horaDeInicio")),
 			//			def reservaIn = [horaDeInicio:new Date(params.get("horaDeInicio")),
 			cantidadHorasReservadas:params.get("cantidadHorasReservadas")]
-		def reservaOut = clienteService.crearReserva(  [reserva:reservaIn,
+		def reservaOut = reservaService.crearReserva(  [reserva:reservaIn,
 			estacionamientoId:params["estacionamientoId"],
 			usuario:session.getAttribute("usuario")])
 		if(reservaOut != null) {
@@ -102,7 +101,7 @@ class ReservaController {
 	def	cliente () {
 		//TODO sin codificar. falta tener las altas de estacionamiento hechas
 		LoggerService.Log( "PERFIL CLIENTE")
-		[listadoReservas:clienteService.listadoReservasParaClientes(null, Long.valueOf(params.get("id")),session.usuario?.debenMostrarseEstadosCompletados())]
+		[listadoReservas:reservaService.listadoReservasParaClientes(null, Long.valueOf(params.get("id")),session.usuario?.debenMostrarseEstadosCompletados())]
 	}
 	def calificarReserva(){
 		LoggerService.Log("FP: Calificar Reserva "+params.get("reservaId"))

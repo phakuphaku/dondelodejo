@@ -12,6 +12,7 @@ class EstacionamientoController {
 	def estacionamientoService
 	def reservaService
 	def usuarioService
+	
 	def beforeInterceptor = [action:this.&checkUser,except:['index', 'mostrar', 'listado', 'buscarPorDistancia']]
 	def checkUser() {
 		if(!session.getAttribute("usuario")) {
@@ -138,7 +139,7 @@ class EstacionamientoController {
 			LoggerService.Log( "ADMINISTRADOR "+estacionamiento.getId())
 			if (session.getAttribute("usuario").estacionamiento.id==estacionamiento.getId()) 
 				return [estacionamiento:estacionamiento,
-						listadoReservas:clienteService.listadoReservasParaAdministrador(
+						listadoReservas:reservaService.listadoReservasParaAdministrador(
 								Long.valueOf(params.get("id")),
 								session.usuario?.debenMostrarseEstadosCompletados()
 								)
