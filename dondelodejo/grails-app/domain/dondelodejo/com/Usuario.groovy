@@ -2,22 +2,6 @@ package dondelodejo.com
 
 class Usuario {
 
-	static final String USUARIO_SOPORTE='SOP'
-	static final String USUARIO_ADMINISTRADOR='ADM'
-	static final String USUARIO_CLIENTE='CLI'
-
-	public static getSoporte(){
-		USUARIO_SOPORTE
-	}
-	public static getAdministrador(){
-		USUARIO_ADMINISTRADOR
-	}
-	public static getCliente(){
-		USUARIO_CLIENTE
-	}
-
-	//////////////////////////////////////////////////////////////////////
-
 	String 			nombre
 	String 			apellido
 	String 			email
@@ -25,10 +9,11 @@ class Usuario {
 	String			tipoUsuario
 	Estacionamiento estacionamiento
 	boolean 		mostrarReservasYaCompletadas=false
+	static final String USUARIO_SOPORTE='SOP'
+	static final String USUARIO_ADMINISTRADOR='ADM'
+	static final String USUARIO_CLIENTE='CLI'
 
 	static hasMany = [reservas:Reserva]
-
-	//////////////////////////////////////////////////////////////////////
 
 	static constraints = {
 		nombre		nullable:false,blank:false
@@ -39,6 +24,15 @@ class Usuario {
 		estacionamiento nullable:true
 	}
 
+	public static getSoporte(){
+		USUARIO_SOPORTE
+	}
+	public static getAdministrador(){
+		USUARIO_ADMINISTRADOR
+	}
+	public static getCliente(){
+		USUARIO_CLIENTE
+	}
 	def esSoporte(){
 		this.tipoUsuario == USUARIO_SOPORTE
 	}
@@ -48,16 +42,28 @@ class Usuario {
 	def esCliente(){
 		this.tipoUsuario == USUARIO_CLIENTE
 	}
+	
+	
+	
+	/**
+	 * Este método ayuda a un debug mas entendible.
+	 */
 	String toString(){
-		//		"Usuario: "+this.email+" Tipo: "+this.tipoUsuario
 		this.nombre+" "+this.apellido+" ("+this.tipoUsuario+")"
 	}
+	
+	
+	
+	
+	
+	
 	public boolean debenMostrarseEstadosCompletados() {
 		return mostrarReservasYaCompletadas;
 	}
 	public void setMostrarEstadosCompletados(boolean truefalse) {
 		this.mostrarReservasYaCompletadas = truefalse;
 	}
+	//TODO REFECTOR a getUsuarioById
 	def static Usuario getById(Long id){
 		Usuario u=Usuario.get(id)
 		if (u.tipoUsuario==getCliente()){
