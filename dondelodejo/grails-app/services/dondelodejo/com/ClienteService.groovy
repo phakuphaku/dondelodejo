@@ -4,9 +4,7 @@ import dondelodejo.com.Estacionamiento
 import dondelodejo.com.Reserva
 
 import java.lang.RuntimeException
-import java.util.logging.Logger.LoggerHelper;
 
-import org.apache.jasper.compiler.Node.ParamsAction;
 class ClienteService {
 
 	def buscarPorDistancia(String direccion,String localidad,String pais,Integer metros) {

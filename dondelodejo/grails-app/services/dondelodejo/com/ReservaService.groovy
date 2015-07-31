@@ -26,8 +26,8 @@ class ReservaService {
 		Usuario.getById(usuarioId).calificar(Reserva.get(reservaId),valor,detalle)
 		return 0
 	}
-	def Reserva[] listadoReservas (Long idEstacionamiento,Long idUsuario,boolean bool) {
-		return Reserva.listadoPorEstacionamientoYUsuario(idEstacionamiento,idUsuario,bool)
+	def Reserva[] listadoReservas (Long idEstacionamiento,Long idUsuario) {
+		return Reserva.listadoPorEstacionamientoYUsuario(idEstacionamiento,idUsuario)
 	}
 	def Reserva[] listadoReservasParaClientes (Long idEstacionamiento,Long idUsuario,boolean bool) {
 		return Reserva.listadoPorEstacionamientoYUsuarioYEstadosVisiblesParaClientes(idEstacionamiento,idUsuario,bool)

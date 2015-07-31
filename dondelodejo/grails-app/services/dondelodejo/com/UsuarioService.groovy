@@ -10,21 +10,25 @@ import java.security.MessageDigest
  *
  */
 class UsuarioService {
+	
 	static transactional = true
+	
 	def buscarUsuario (Map datosDeUsuario) {
 		Usuario usuario = new Usuario()
 		usuario = Usuario.findWhere(datosDeUsuario)
 	}
-	/**debe ser un usuario valido, verifica que no manipulen la session o cookie*/
+	
+	/**
+	 * Debe ser un usuario válido, verifica que no manipulen la session o cookie
+	 */
 	private boolean validarUsuario(Usuario usuario) {
-		if (Usuario.findWhere(usuario.properties)){
-			return true
-		}
+		if (Usuario.findWhere(usuario.properties)){return true}
 		return false
 	}
+	
 	def esTipoUsuario (Usuario usuario,String tipo) {
 		if (!validarUsuario(usuario)) {
-			throw new RuntimeException("El Usuario no es v�lido")
+			throw new RuntimeException("El Usuario no es válido")
 		}
 		def tipoDeUsuario = false
 		//TODO FACUNDO arreglar metodo y sacar switch
