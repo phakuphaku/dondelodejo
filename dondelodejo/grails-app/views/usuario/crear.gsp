@@ -9,7 +9,7 @@
 	<div id="page-body" role="main">
 		<div class="well">
 			<legend>Crear usuario</legend>
-			<g:form class="formulario form-horizontal" action="crear">
+			<g:form class="formulario form-horizontal" action="guardar">
 				<fieldset>
 
 					<%--Nombre--%>

@@ -64,7 +64,7 @@ class EstacionamientoController {
 			//TODO FACUNDO PRUEBA TEMPORAL
 			usuarioService.setUltimosVisitados(estacionamiento,session.getAttribute("usuario"))
 			LoggerService.Log("METODO getUltimosVisitados "+usuarioService.getUltimosVisitados(session.getAttribute("usuario")))
-			}
+			} 
 			[estacionamiento:map["estacionamiento"],cocherasLibres:map["cantidadCocherasLibres"]]
 		}
 	}

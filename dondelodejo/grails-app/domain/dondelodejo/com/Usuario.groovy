@@ -1,5 +1,7 @@
 package dondelodejo.com
 
+import java.security.MessageDigest
+
 class Usuario {
 
 	String 			nombre
@@ -28,6 +30,14 @@ class Usuario {
 		estacionamiento nullable:true
 	}
 
+	def Usuario(){
+		super()
+	}
+	def guardar(){
+		this.contrasenia = Usuario.encriptar(this.contrasenia)
+		this.save(flush:true)
+	}
+	
 	public static getSoporte(){
 		USUARIO_SOPORTE
 	}
@@ -75,7 +85,7 @@ class Usuario {
 			limiteMaximoDeVisitados = (this.ultimosVisitados.split(",").size() >= this.maxVisitados)
 			int ultimaPosicionDelArray = this.maxVisitados -1
 			if (limiteMaximoDeVisitados) 
-				this.removerElUltimo(ultimosVisitados)
+				this.ultimosVisitados=this.removerElUltimo(ultimosVisitados)
 			this.ultimosVisitados=E.id+","+ultimosVisitados
 		}else{
 			this.ultimosVisitados=E.id
@@ -88,10 +98,10 @@ class Usuario {
 		String[] StringSpliteado = s.split(",")
 		int posicionDelUltimo = StringSpliteado.size() -1
 		String aDevolver = ""
-		StringSpliteado.each  { cadaIdDeEstacionamientoString -> 
-			aDevolver+=cadaIdDeEstacionamientoString+","
+		(0..posicionDelUltimo-1).each  { pos -> 
+			aDevolver+=StringSpliteado[pos]+","
 		}
-		aDevolver=aDevolver.substring(0, aDevolver-1)
+		aDevolver=aDevolver.substring(0, aDevolver.size()-1)
 		return aDevolver
 	}
 	
@@ -113,5 +123,26 @@ class Usuario {
 		if (u.tipoUsuario==getSoporte()){
 			return new Usuario() //TODO para este camino esta situacion no esta definida.
 		}
+	}
+	def static encriptar(String pass){
+		String passwordToHash = pass;
+		String generatedPassword = null;
+
+		// Create MessageDigest instance for MD5
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		//Add password bytes to digest
+		md.update(passwordToHash.getBytes());
+		//Get the hash's bytes
+		byte[] bytes = md.digest();
+		//This bytes[] has bytes in decimal format;
+		//Convert it to hexadecimal format
+		StringBuilder sb = new StringBuilder();
+		for(int i=0; i< bytes.length ;i++)
+		{
+			sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+		}
+		//Get complete hashed password in hex format
+		generatedPassword = sb.toString();
+		return generatedPassword
 	}
 }

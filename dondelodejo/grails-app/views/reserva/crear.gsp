@@ -61,7 +61,7 @@
 					<label for="horaDeInicio">Fecha de Inicio:</label>
 					<g:datePicker name="horaDeInicio"
 						value="${reservaFiltro?.horaDeInicio}" precision="minute"
-						years="[2014,2015]" />
+						years="[2015,2016]" />
 
 					<!--<g:textField name="horaDeInicio" value="${reservaFiltro?.horaDeInicio}"/>-->
 				</div>

@@ -17,6 +17,7 @@ class ReservaController {
 
 	/*TODO: en un futuro este crear puede levantar todas 
 	 * las reservas del estacionamiento para ver los horarios libres.
+	 * Para esto es necesario, mantener una agenda por Estacionamiento.
 	 */
 	def crear () {
 		//creo la reserva para el filtro de creacion
@@ -34,7 +35,7 @@ class ReservaController {
 
 	public static Long getDateFromDatePicket(Map map,String s){
 		Date fecha=new Date(Integer.valueOf(map.get(s+"_year"))-1900,
-				Integer.valueOf(map.get(s+"_month")),
+				Integer.valueOf(map.get(s+"_month"))-1,
 				Integer.valueOf(map.get(s+"_day")),
 				Integer.valueOf(map.get(s+"_hour")),
 				Integer.valueOf(map.get(s+"_minute")))
@@ -99,14 +100,12 @@ class ReservaController {
 	public listado() {
 		Reserva[] aux = reservaService.getReservasPorEstacionamientoYClienteYEstado(params)
 		[reservasInstanciaListado: aux , reservaInstanciaTotal: (List)aux.size()]
+	}	
+	def	cliente () {
+		//TODO sin codificar. falta tener las altas de estacionamiento hechas
+		LoggerService.Log( "PERFIL CLIENTE")
+		[listadoReservas:reservaService.listadoReservasParaClientes(null, Long.valueOf(params.get("id")),session.usuario?.debenMostrarseEstadosCompletados())]
 	}
-	
-//* Para sacar	
-//	def	cliente () {
-//		//TODO sin codificar. falta tener las altas de estacionamiento hechas
-//		LoggerService.Log( "PERFIL CLIENTE")
-//		[listadoReservas:reservaService.listadoReservasParaClientes(null, Long.valueOf(params.get("id")),session.usuario?.debenMostrarseEstadosCompletados())]
-//	}
 	def calificarReserva(){
 		LoggerService.Log("FP: Calificar Reserva "+params.get("reservaId"))
 		LoggerService.Log(params)

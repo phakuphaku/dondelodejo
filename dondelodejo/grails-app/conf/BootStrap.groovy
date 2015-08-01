@@ -114,7 +114,7 @@ class BootStrap {
 		ubicacion:ubicacion9).save()
 		estacionamiento8.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
 		Ubicacion ubicacion40 = new Ubicacion(direccionStr:"Rinc&oacuten 659",direccionX:-34.6167,direccionY:-58.396122,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
-		Estacionamiento estacionamiento9 = new Estacionamiento(nombre:'Gran Garage Rinc&oacuten',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:0,
+		Estacionamiento estacionamiento9 = new Estacionamiento(nombre:'Gran Garage Rincon',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:0,
 		ubicacion:ubicacion40).save()
 		estacionamiento9.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
 		Ubicacion ubicacion41 = new Ubicacion(direccionStr:"Bartolom&eacute Mitre 2350",direccionX:-34.608532,direccionY:-58.399876,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
@@ -133,7 +133,7 @@ class BootStrap {
 		Estacionamiento estacionamiento13 = new Estacionamiento(nombre:'Yesiton Sa',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:0,
 		ubicacion:ubicacion44).save()
 		estacionamiento13.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
-		Ubicacion ubicacion45 = new Ubicacion(direccionStr:"Tte. Gral Juan Domingo Per&oacuten 2029",direccionX:-34.607063,direccionY:-58.39545,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
+		Ubicacion ubicacion45 = new Ubicacion(direccionStr:"Tte. Gral Juan Domingo Peron 2029",direccionX:-34.607063,direccionY:-58.39545,barrio:"Balvanera",	localidad:"Capital Federal",provincia:"Capital Federal",pais:"Argentina");
 		Estacionamiento estacionamiento14 = new Estacionamiento(nombre:'Garage Sucre Sa',descripcion:"Una linda esquina",fechaAlta:new Date(),numCocheras:numCocheras,puntaje:0,
 		ubicacion:ubicacion45).save()
 		estacionamiento14.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
