@@ -38,21 +38,22 @@ class EstacionamientoController {
 		return [estacionamiento:e]
 	}
 
-	//TODO pasar a servicio
-	def guardar () {
-		LoggerService.Log("GUARDAR "+params)
-		Estacionamiento estacionamiento = estacionamientoService.alta(params);
-
-		if(estacionamiento != null) {
-			flash.message = "El estacionamiento fue creado exitosamente."
-			flash.message_type = "S"
-			redirect action:"mostrar", id:estacionamiento.id, model: [estacionamiento:estacionamiento]
-		} else {
-			flash.message = "El estacionamiento no fue creado."
-			flash.message_type = "E"
-			render view:"crear", model:[estacionamiento:estacionamiento]
-		}
-	}
+//  Para Sacar 
+//	//TODO pasar a servicio
+//	def guardar () {
+//		LoggerService.Log("GUARDAR "+params)
+//		Estacionamiento estacionamiento = estacionamientoService.alta(params);
+//
+//		if(estacionamiento != null) {
+//			flash.message = "El estacionamiento fue creado exitosamente."
+//			flash.message_type = "S"
+//			redirect action:"mostrar", id:estacionamiento.id, model: [estacionamiento:estacionamiento]
+//		} else {
+//			flash.message = "El estacionamiento no fue creado."
+//			flash.message_type = "E"
+//			render view:"crear", model:[estacionamiento:estacionamiento]
+//		}
+//	}
 
 	//TODO: El mostrar no debe devolver el objeto. Pasar a Servicio.
 	def mostrar () {

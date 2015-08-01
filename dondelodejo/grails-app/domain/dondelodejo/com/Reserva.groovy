@@ -49,7 +49,6 @@ class Reserva {
 	}
 	
 	def static Usuario[] listadoDeClientesPorEstacionamiento(Long idEstacionamiento){
-	//TODO Generar vista/sevicio para que llame a este m�todo		
 		
 		Usuario[] usuarios
 		
@@ -65,7 +64,6 @@ class Reserva {
 	}
 	/**3.En la pantalla de operador debe existir un listado o link con las reservas aceptadas para poder señalarlas como utilizadas*/
 	def static getReservasAceptadasPorEstacionamiento(Long idEstacionamiento){
-	//TODO Metodo sin codear USAR getReservasPorEstacionamientoYClienteYEstado
 		
 		return this.getReservasPorEstacionamientoYClienteYEstado(idEstacionamiento,null,null)
 		
@@ -112,21 +110,18 @@ class Reserva {
 
 	/** 4.Cliente califica la reserva. estado CALIFxCLI. Con esta calificacion se actualiza el puntaje del estacionamiento. */
 	def static getReservasUtilizadasPorCliente(Long idCliente){
-	//TODO Metodo sin codear USAR getReservasPorEstacionamientoYClienteYEstado
-		
+	
 		return this.getReservasPorEstacionamientoYClienteYEstado(null,idCliente,"CALIFxCLI")
 	}
 	
 	/**5.Admin "califica" al cliente. estado COMPLETA. Seria mas bien una replica en caso de que el cliente califica negativo.*/
 	def static getReservasCalificadasPorElClientePorEstacionamiento(Long idEstacionamiento){
-	//TODO Metodo sin codear USAR getReservasPorEstacionamientoYClienteYEstado
 		
 		return this.getReservasPorEstacionamientoYClienteYEstado(idEstacionamiento,null,"COMPLETA")
 		
 	}
 	/**El detalle de estacionamiento tiene un resumen de las ultimas calificaciones recibidas por el estacionamiento.*/
 	def static listadoDeCalificacionesRecibidasPorEstacionamiento(Long idEstacionamiento){
-	//TODO Metodo sin codear
 		
 		def criteria = Estacionamiento.createCriteria()
 		def estacionamiento = criteria.list {
@@ -178,7 +173,7 @@ class Reserva {
 	}
 
 	private recalcularPuntajeEstacionamiento(int valor) {
-		//TODO FACUNDO. No tengo idea que es el Lockeo pesimista Averiguar por que esto es necesario?
+		//*Lockeo pesimista
 		int cantidad = Reserva.findAllByEstacionamientoAndEstado(this.estacionamiento,ESTADO_CALIFICADA_POR_CLIENTE, [lock: true]).size()
 		cantidad += Reserva.findAllByEstacionamientoAndEstado(this.estacionamiento,ESTADO_COMPLETA, [lock: true]).size()
 		int puntaje = this.estacionamiento.puntaje
