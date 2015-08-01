@@ -14,6 +14,8 @@ class Cochera {
 	 * Ya que no tienen porque estar dadas de alta en orden.
 	 */
 	int numero;
+
+//* Para Sacar	
 //	Date fechaAlta;
 //	/** tamanio dira para que tipo de vehiculo nos sirve esta cochera */
 //	String tipoVehiculo;
@@ -27,10 +29,11 @@ class Cochera {
 	String estado
 	Date horaOcupacion
 	Date horaLiberacion
-	
-	int compareTo(Cochera obj) {
-		numero.compareTo(obj.numero)
-	  }
+
+// Para Sacar		
+//	int compareTo(Cochera obj) {
+//		numero.compareTo(obj.numero)
+//	  }
 	
     static constraints = {
 		numero			(nullable:false)
@@ -92,7 +95,8 @@ class Cochera {
 		resultado.toString()
 	}
 	static String estadoLibre(){ESTADO_LIBRE}
-	static String estadoOcupada(){ESTADO_OCUPADA}
+//* Para Sacar
+// 	static String estadoOcupada(){ESTADO_OCUPADA}
 	
 	String toString(){
 		return "Cochera No: "+String.valueOf(numero?numero:id);

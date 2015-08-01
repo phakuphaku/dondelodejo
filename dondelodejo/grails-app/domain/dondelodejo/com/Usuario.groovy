@@ -101,7 +101,7 @@ class Usuario {
 	public void setMostrarEstadosCompletados(boolean truefalse) {
 		this.mostrarReservasYaCompletadas = truefalse;
 	}
-	//TODO REFECTOR a getUsuarioById
+	
 	def static Usuario getById(Long id){
 		Usuario u=Usuario.get(id)
 		if (u.tipoUsuario==getCliente()){

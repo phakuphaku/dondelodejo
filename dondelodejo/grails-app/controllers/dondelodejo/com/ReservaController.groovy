@@ -43,7 +43,10 @@ class ReservaController {
 	}
 
 
-
+/**
+ * Verificar si se usa y en donde
+ * @return
+ */
 	def alta () {
 		LoggerService.Log(params)
 		Map reservaIn = [horaDeInicio:new Date(getDateFromDatePicket(params,"horaDeInicio")),
@@ -98,11 +101,12 @@ class ReservaController {
 		[reservasInstanciaListado: aux , reservaInstanciaTotal: (List)aux.size()]
 	}
 	
-	def	cliente () {
-		//TODO sin codificar. falta tener las altas de estacionamiento hechas
-		LoggerService.Log( "PERFIL CLIENTE")
-		[listadoReservas:reservaService.listadoReservasParaClientes(null, Long.valueOf(params.get("id")),session.usuario?.debenMostrarseEstadosCompletados())]
-	}
+//* Para sacar	
+//	def	cliente () {
+//		//TODO sin codificar. falta tener las altas de estacionamiento hechas
+//		LoggerService.Log( "PERFIL CLIENTE")
+//		[listadoReservas:reservaService.listadoReservasParaClientes(null, Long.valueOf(params.get("id")),session.usuario?.debenMostrarseEstadosCompletados())]
+//	}
 	def calificarReserva(){
 		LoggerService.Log("FP: Calificar Reserva "+params.get("reservaId"))
 		LoggerService.Log(params)

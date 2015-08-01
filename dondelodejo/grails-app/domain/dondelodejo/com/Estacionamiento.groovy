@@ -57,9 +57,11 @@ class Estacionamiento {
 		def query = Estacionamiento.where { id == 1 }
 		query.list()
 	}
-	public Map buscar(String direccion,String localidad,String pais){
-		this.ubicacion.buscar(direccion,localidad,pais)
-	}
+
+// Para Sacar
+//	public Map buscar(String direccion,String localidad,String pais){
+//		this.ubicacion.buscar(direccion,localidad,pais)
+//	}
 	def establecerUbicacion(Map map){
 		Ubicacion ubicacion = new Ubicacion(map)
 		ubicacion.buscar()
@@ -75,7 +77,7 @@ class Estacionamiento {
 
 		Cochera.cocherasLibres(this.id)
 	}
-
+//* Para Sacar
 	/*
 	 * Devuelve las calificaciones del estacionamiento
 	 */
@@ -87,9 +89,9 @@ class Estacionamiento {
 	/*
 	 * Devuelve las calificaciones del estacionamiento.
 	 */
-	def getCalificaciones(){
+//	def getCalificaciones(){
 		//		this.calificaciones.findAll(estacionamiento_id == '1');
-	}
+//	}
 }
 
 class Ubicacion {
@@ -115,7 +117,7 @@ class Ubicacion {
 		provincia		nullable:true
 		pais 			nullable:true,defaultValue:"Argentina"
 	}
-
+	// Para Sacar
 	//	public Ubicacion (Map params) {
 	//		if (params){
 	//			this.direccionStr=params.get("direccionStr")
@@ -145,10 +147,17 @@ class Ubicacion {
 			CoordX = resultadoCD.x
 			CoordY = resultadoCD.y
 		} catch (Exception e) {
-			LoggerService.Log("Error Codificaciï¿½n geogrï¿½fica")
+			LoggerService.Log("Error Codificación geográfica")
 		}
 		[x:CoordX,y:CoordY]
 	}
+	/**
+	 * Este Método esta codeado pero falta implementarlo, sacarlo del servicio e invocar a este método
+	 * @param x
+	 * @param y
+	 * @param metros
+	 * @return
+	 */
 	def boolean estaDentroDeRangoEnMetros (float x,float y,int metros) {
 		float tolerancia=metros * this.gpsToMetros
 		float desdeX = x - tolerancia

@@ -71,9 +71,10 @@ class LoginController {
 		//do nothing
 		//}
 	}
-	def verificarTipoUsuario(String s) {
-		if(!session.usuario || session.usuario.tipoUsuario != s) {
-			redirect (controller:"login", action:"index")
-		}
-	}
+// Para Sacar
+//	def verificarTipoUsuario(String s) {
+//		if(!session.usuario || session.usuario.tipoUsuario != s) {
+//			redirect (controller:"login", action:"index")
+//		}
+//	}
 }
