@@ -7,8 +7,11 @@ class Usuario {
 	String 			email
 	String 			contrasenia
 	String			tipoUsuario
+	String			ultimosVisitados
 	Estacionamiento estacionamiento
 	boolean 		mostrarReservasYaCompletadas=false
+	int				maxVisitados=3
+	
 	static final String USUARIO_SOPORTE='SOP'
 	static final String USUARIO_ADMINISTRADOR='ADM'
 	static final String USUARIO_CLIENTE='CLI'
@@ -21,6 +24,7 @@ class Usuario {
 		email		nullable:false,email:true
 		contrasenia	nullable:false,blank:false
 		tipoUsuario nullable:true,inList: [getSoporte(), getAdministrador(), getCliente()],defaultValue:this.getCliente()
+		ultimosVisitados nullable:true,defaultValue:""
 		estacionamiento nullable:true
 	}
 
@@ -54,8 +58,42 @@ class Usuario {
 	
 	
 	
+	def obtenerUltimosVisitados (){
+		ArrayList ultimosEstacionamientosVisitados = new ArrayList<Estacionamiento>()
+		String [] aux;
+		if (ultimosVisitados!=null && ultimosVisitados!=""){
+			aux = this.ultimosVisitados.split(",")
+			aux.each{idE -> 
+				if (idE != null )
+				ultimosEstacionamientosVisitados.add(Estacionamiento.get(Long.valueOf(idE)))	
+			}}
+		return ultimosEstacionamientosVisitados
+	}
+	def guardarUltimosVisitados (Estacionamiento E){
+		boolean limiteMaximoDeVisitados = false
+		if (this.ultimosVisitados != null) {
+			limiteMaximoDeVisitados = (this.ultimosVisitados.split(",").size() >= this.maxVisitados)
+			int ultimaPosicionDelArray = this.maxVisitados -1
+			if (limiteMaximoDeVisitados) 
+				this.removerElUltimo(ultimosVisitados)
+			this.ultimosVisitados=E.id+","+ultimosVisitados
+		}else{
+			this.ultimosVisitados=E.id
+		}
+		this.save(flush:true)
+		return
+	}
 	
-	
+	def removerElUltimo(String s){
+		String[] StringSpliteado = s.split(",")
+		int posicionDelUltimo = StringSpliteado.size() -1
+		String aDevolver = ""
+		StringSpliteado.each  { cadaIdDeEstacionamientoString -> 
+			aDevolver+=cadaIdDeEstacionamientoString+","
+		}
+		aDevolver=aDevolver.substring(0, aDevolver-1)
+		return aDevolver
+	}
 	
 	public boolean debenMostrarseEstadosCompletados() {
 		return mostrarReservasYaCompletadas;

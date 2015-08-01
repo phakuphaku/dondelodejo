@@ -85,5 +85,13 @@ class UsuarioService {
 		else usuario.setMostrarEstadosCompletados(true)
 		return usuario
 	}
-	
+	public void setUltimosVisitados(Estacionamiento e,Usuario usuarioSession){
+		Usuario usuario=Usuario.get(usuarioSession.id)
+		usuario.guardarUltimosVisitados(e)
+		return
+	}
+	def getUltimosVisitados(Usuario usuarioSession){
+		Usuario usuario=Usuario.get(usuarioSession.id)
+		usuario.obtenerUltimosVisitados()
+	}
 }

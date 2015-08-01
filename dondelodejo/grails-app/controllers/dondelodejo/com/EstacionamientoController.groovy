@@ -59,6 +59,11 @@ class EstacionamientoController {
 		conEstacionamiento { estacionamiento ->
 			LoggerService.Log("MOSTRAR "+estacionamiento.getId())
 			Map map = estacionamientoService.cocherasLibres(params)
+			if (session.getAttribute("usuario")!=null){
+			//TODO FACUNDO PRUEBA TEMPORAL
+			usuarioService.setUltimosVisitados(estacionamiento,session.getAttribute("usuario"))
+			LoggerService.Log("METODO getUltimosVisitados "+usuarioService.getUltimosVisitados(session.getAttribute("usuario")))
+			}
 			[estacionamiento:map["estacionamiento"],cocherasLibres:map["cantidadCocherasLibres"]]
 		}
 	}
