@@ -11,6 +11,10 @@
 		<g:link controller="estacionamiento" action="listado">volver al listado</g:link>	
 		</div>
 		<legend>
+			Sus Ultimas Visitas:
+		</legend>
+		<g:render template="listadoHistorialCliente"/>
+		<legend>
 			Reservas: (<g:link controller="reserva" action="cambiarEstadoListadoCompleto">Ver/Ocultar Listado Completo</g:link>)
 		</legend>
 		<g:render template="listadoReservasParaCliente"/>

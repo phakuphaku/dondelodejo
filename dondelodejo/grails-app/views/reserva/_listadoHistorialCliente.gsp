@@ -7,7 +7,7 @@
 				<tr>
 					<th>Nombre</th>
 					<th>Dirección</th>
-					th>Barrio</th>
+					<th>Barrio</th>
 					<th>Localidad</th>
 					<th>$ Hora</th>
 					<th>Calificación</th>
@@ -19,24 +19,24 @@
 				</tr>
 			</thead>
 
-			<g:each in="${estacionamientoInstanciaListado}" var="e">
+			<g:each in="${listadoHistorial}" var="e">
 				<%--Color de la fila según el puntaje del estacionamiento--%>
 				<g:if test="${e.puntaje >= 4}">
 					<tr class="success"
-						onclick='document.location = "<g:createLink action='mostrar' id='${e.id}' />" '>
+						onclick='document.location = "<g:createLink controller='estacionamiento' action='mostrar' id='${e.id}' />" '>
 				</g:if>
 				<g:elseif test="${e.puntaje >= 3}">
 					<tr class="warning"
-						onclick='document.location = "<g:createLink action='mostrar' id='${e.id}' />" '>
+						onclick='document.location = "<g:createLink controller='estacionamiento' action='mostrar' id='${e.id}' />" '>
 				</g:elseif>
 				<g:elseif test="${e.puntaje >= 1}">
 					<tr class="danger"
-						onclick='document.location = "<g:createLink action='mostrar' id='${e.id}' />" '>
+						onclick='document.location = "<g:createLink controller='estacionamiento' action='mostrar' id='${e.id}' />" '>
 				</g:elseif>
 				<g:elseif test="${e.puntaje == 0}">
 					<%--Todavía no fue calificado--%>
 					<tr
-						onclick='document.location = "<g:createLink action='mostrar' id='${e.id}' />" '>
+						onclick='document.location = "<g:createLink controller='estacionamiento' action='mostrar' id='${e.id}' />" '>
 				</g:elseif>
 
 				<td>
@@ -51,7 +51,6 @@
 				<td>
 					${e.ubicacion?.localidad}
 				</td>
-
 				<td>
 					${e.cocheras[0].precioCocheraHora}
 				</td>
@@ -75,14 +74,3 @@
 				</tr>
 			</g:each>
 		</table>
-
-		<%--Cantidad de estacionamientos mostrados--%>
-		<div class="alert alert-dismissible alert-success">
-			<button type="button" class="close" data-dismiss="alert">×</button>
-			<g:if test="${estacionamientoInstanciaTotal == 1}">
-				<strong> ${estacionamientoInstanciaTotal}</strong> elemento mostrado.
-			</g:if>
-			<g:else>
-				<strong> ${estacionamientoInstanciaTotal}</strong> elementos mostrados.
-			</g:else>
-		</div>

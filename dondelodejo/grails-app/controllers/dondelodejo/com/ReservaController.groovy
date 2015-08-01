@@ -104,7 +104,8 @@ class ReservaController {
 	def	cliente () {
 		//TODO sin codificar. falta tener las altas de estacionamiento hechas
 		LoggerService.Log( "PERFIL CLIENTE")
-		[listadoReservas:reservaService.listadoReservasParaClientes(null, Long.valueOf(params.get("id")),session.usuario?.debenMostrarseEstadosCompletados())]
+		[listadoReservas:reservaService.listadoReservasParaClientes(null, Long.valueOf(params.get("id")),session.usuario?.debenMostrarseEstadosCompletados()),
+			listadoHistorial:usuarioService.getUltimosVisitados(session.usuario)]
 	}
 	def calificarReserva(){
 		LoggerService.Log("FP: Calificar Reserva "+params.get("reservaId"))
