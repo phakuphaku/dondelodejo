@@ -11,7 +11,7 @@
 		<g:link controller="estacionamiento" action="listado">volver al listado</g:link>	
 		</div>
 		<legend>
-			Sus Ultimas Visitas:
+			Sus Ultimos Estacionamientos Visitados:
 		</legend>
 		<g:render template="listadoHistorialCliente"/>
 		<legend>

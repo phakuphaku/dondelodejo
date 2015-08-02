@@ -5,7 +5,7 @@ class EstacionamientoService {
 	def buscar(Map map) {
 		LoggerService.Log( "BUSCAR "+map)
 		if (map.containsKey('id')){
-			Estacionamiento.get(Long.valueOf(map.get("id")))
+			return Estacionamiento.get(Long.valueOf(map.get("id")))
 		}
 		/*TODO: Esto va con query
 		 * else Estacionamiento.get
@@ -82,14 +82,14 @@ class EstacionamientoService {
 	def listado(Map map) {
 		map.putAt("sort","puntaje")
 		map.putAt("order","DESC")
-		Estacionamiento.list(map)
+		Estacionamiento.list(map).findAll{ estacionamiento ->	estacionamiento.fechaBaja==null}
 	}
 	/** Verifica si es un estacionamiento v�lido */
 	def validar(Estacionamiento e){
 		e.validate()
 	}
 	Integer cantidad(){
-		Estacionamiento.count()
+		Estacionamiento.list().findAll{ estacionamiento ->	estacionamiento.fechaBaja==null}.size()
 	}
 	boolean borrar(Long id){
 		Estacionamiento estacionamiento = this.buscar([id:id])

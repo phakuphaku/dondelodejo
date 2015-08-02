@@ -64,6 +64,7 @@ class Cochera {
 		Object[] objArray = Estacionamiento.get(idEstacionamiento).cocheras.toArray()
 
 		int i=0;Cochera cochera;
+		//TODO FACUNDO FOR PARA QUITARRRRRR (0..objArray.length).each
 		for(i; i < objArray.length ; i++){
 			cochera = (Cochera)objArray[i]
 			if (!cochera.estaOcupada()) cantidad++

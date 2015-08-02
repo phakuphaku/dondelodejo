@@ -38,22 +38,21 @@ class EstacionamientoController {
 		return [estacionamiento:e]
 	}
 
-//  Para Sacar 
-//	//TODO pasar a servicio
-//	def guardar () {
-//		LoggerService.Log("GUARDAR "+params)
-//		Estacionamiento estacionamiento = estacionamientoService.alta(params);
-//
-//		if(estacionamiento != null) {
-//			flash.message = "El estacionamiento fue creado exitosamente."
-//			flash.message_type = "S"
-//			redirect action:"mostrar", id:estacionamiento.id, model: [estacionamiento:estacionamiento]
-//		} else {
-//			flash.message = "El estacionamiento no fue creado."
-//			flash.message_type = "E"
-//			render view:"crear", model:[estacionamiento:estacionamiento]
-//		}
-//	}
+	//TODO pasar a servicio
+	def guardar () {
+		LoggerService.Log("GUARDAR "+params)
+		Estacionamiento estacionamiento = estacionamientoService.alta(params);
+
+		if(estacionamiento != null) {
+			flash.message = "El estacionamiento fue creado exitosamente."
+			flash.message_type = "S"
+			redirect action:"mostrar", id:estacionamiento.id, model: [estacionamiento:estacionamiento]
+		} else {
+			flash.message = "El estacionamiento no fue creado."
+			flash.message_type = "E"
+			render view:"crear", model:[estacionamiento:estacionamiento]
+		}
+	}
 
 	//TODO: El mostrar no debe devolver el objeto. Pasar a Servicio.
 	def mostrar () {
@@ -62,6 +61,7 @@ class EstacionamientoController {
 			Map map = estacionamientoService.cocherasLibres(params)
 			if (session.getAttribute("usuario")!=null){
 			//TODO FACUNDO PRUEBA TEMPORAL
+			if (session.getAttribute("usuario").esSoporte()) session.homeId=estacionamiento.getId()
 			usuarioService.setUltimosVisitados(estacionamiento,session.getAttribute("usuario"))
 			LoggerService.Log("METODO getUltimosVisitados "+usuarioService.getUltimosVisitados(session.getAttribute("usuario")))
 			} 
@@ -143,13 +143,15 @@ class EstacionamientoController {
 	def administrador () {
 		conEstacionamiento { estacionamiento ->
 			LoggerService.Log( "ADMINISTRADOR "+estacionamiento.getId())
-			if (session.getAttribute("usuario").estacionamiento.id==estacionamiento.getId()) 
+			if (session.usuario.esSoporte() || session.getAttribute("usuario").estacionamiento.id==estacionamiento.getId()) {
+				if (session.getAttribute("usuario").esSoporte()) session.homeId=estacionamiento.getId()
 				return [estacionamiento:estacionamiento,
 						listadoReservas:reservaService.listadoReservasParaAdministrador(
 								Long.valueOf(params.get("id")),
 								session.usuario?.debenMostrarseEstadosCompletados()
 								)
 						]
+			}
 			else{
 				//nueva parte para no permitir el ingreso a otros estacionamientos
 				session.removeAttribute("usuario")
@@ -200,6 +202,9 @@ class EstacionamientoController {
 	}
 	def cambiarEstadoListadoCompleto(){
 		session.usuario=usuarioService.cambiarEstadoListadoCompleto(session.usuario)
-		redirect action:session.home, id:session.homeId
+		if (session.usuario.esSoporte())
+			redirect action:"administrador", id:session.homeId
+		else
+			redirect action:session.home, id:session.homeId
 	}
 }

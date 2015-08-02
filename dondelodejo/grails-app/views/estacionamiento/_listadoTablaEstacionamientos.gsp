@@ -7,13 +7,13 @@
 				<tr>
 					<th>Nombre</th>
 					<th>Dirección</th>
-					th>Barrio</th>
+					<th>Barrio</th>
 					<th>Localidad</th>
 					<th>$ Hora</th>
 					<th>Calificación</th>
 					<g:if test="${session.usuario}">
 						<g:if test="${session.usuario.esSoporte()}">
-							<th colspan="3" class="admin">Opciones</th>
+							<th colspan="3" class="soporte">Opciones</th>
 						</g:if>
 					</g:if>
 				</tr>
@@ -64,12 +64,12 @@
 
 					<g:if test="${session.usuario}">
 						<g:if test="${session.usuario.esSoporte()}">
-							<td class="admin"><g:link controller="estacionamiento"
+							<td class="soporte"><g:link controller="estacionamiento"
 									action="editar" id="${e.id}">Editar</g:link></td>
-							<td class="admin"><g:link controller="estacionamiento"
+							<td class="soporte"><g:link controller="estacionamiento"
 									action="borrar" id="${e.id}">Eliminar</g:link></td>
-							<td class="admin"><g:link controller="estacionamiento"
-									action="operador" id="${e.id}">Operador</g:link></td>
+							<td class="soporte"><g:link controller="estacionamiento"
+									action="administrador" id="${e.id}">Operador</g:link></td>
 						</g:if>
 					</g:if>
 				</tr>

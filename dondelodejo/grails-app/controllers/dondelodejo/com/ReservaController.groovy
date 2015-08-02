@@ -126,4 +126,14 @@ class ReservaController {
 		session.usuario=usuarioService.cambiarEstadoListadoCompleto(session.usuario)
 		redirect action:session.home, id:session.homeId
 	}
+	def cambiarEstadoListadoCompletoCrear(){
+		session.usuario=usuarioService.cambiarEstadoListadoCompleto(session.getAttribute("usuario"))
+		render view:"crear", id:params["id"], model:[
+			listadoReservas:reservaService.listadoReservasParaClientes(Long.valueOf(params["id"]), 
+																	session.usuario?.id,
+																	session.usuario?.debenMostrarseEstadosCompletados()),
+			reservaFiltro:new Reserva(),
+			estacionamientoId:params["id"]]
+//		redirect action:"crear", id:params["estacionamientoId"]
+	}
 }

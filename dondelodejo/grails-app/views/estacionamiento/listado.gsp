@@ -4,20 +4,20 @@
 <meta name="layout" content="primerLayout" />
 <title>Primer Vista</title>
 <g:if test="${session.usuario}">
-	<g:if test="${!session.usuario.esAdministrador()}">
+	<g:if test="${!session.usuario.esSoporte()}">
 		<style type='text/css'>
-.admin {
-	display: none;
-}
-</style>
+		.soporte {
+			display: none;
+		}
+		</style>
 	</g:if>
 </g:if>
 <g:else>
 	<style type='text/css'>
-.admin {
-	display: none;
-}
-</style>
+	.soporte {
+		display: none;
+	}
+	</style>
 </g:else>
 </head>
 
@@ -27,7 +27,7 @@
 
 		<legend>Estacionamientos</legend>
 
-		<blockquote class="admin">
+		<blockquote class="soporte">
 			<p>
 				<g:link controller="estacionamiento" action="crear">Agregar estacionamiento</g:link>
 			</p>

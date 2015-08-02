@@ -37,8 +37,8 @@ class LoginController {
 		Long homeId=null
 		if (usuario.esSoporte()) {
 			//			home="administrador";
-			homeController=""
-			home="soporte";
+			homeController="soporte"
+			home="index";
 			//			homeId=usuario.estacionamiento.id
 		}
 		if (usuario.esAdministrador()) {

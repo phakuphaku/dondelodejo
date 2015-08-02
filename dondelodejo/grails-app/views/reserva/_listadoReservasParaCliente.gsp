@@ -29,14 +29,16 @@
 					<td>
 						${r.estado}
 					</td>
-					<td><a class="crearCalificacion${r.id}" href="#">Calificar Ahora</a></td>
-					<script>
-					$(document).ready(function(){
-					    $("a.crearCalificacion${r.id}").click(function(){
-					        $("tr.crearCalificacion${r.id}").fadeToggle(1000);
-					    });
-					});
-					</script>
+					<g:if test="${!session.usuario.esSoporte()}">	
+						<td><a class="crearCalificacion${r.id}" href="#">Calificar Ahora</a></td>
+						<script>
+						$(document).ready(function(){
+						    $("a.crearCalificacion${r.id}").click(function(){
+						        $("tr.crearCalificacion${r.id}").fadeToggle(1000);
+						    });
+						});
+						</script>
+					</g:if>
 				</g:else>
 
 				
