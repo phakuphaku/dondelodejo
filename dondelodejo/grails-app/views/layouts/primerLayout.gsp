@@ -31,11 +31,13 @@
 	<div class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 
+			<%--Logo--%>
 			<g:link controller="login" action="home">
 				<div class="navbar-header">
-					<span class="navbar-brand">DondeLoDejo.com</span>
+						<img src="/dondelodejo/images/logo-xs.png" alt="DondeLoDejo?com">
 				</div>
 			</g:link>
+
 
 			<div id="navbar-main" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
@@ -45,7 +47,7 @@
 						</g:link></li>
 					<li class='last'><g:link controller="estacionamiento"
 							action="buscarPorDistancia">
-							<span>Buscar por Distancia</span>
+							<span>Buscá por Distancia</span>
 						</g:link></li>
 				</ul>
 
@@ -71,20 +73,9 @@
 
 	<%--CONTENEDOR PRINCIPAL--%>
 	<div class="main-container container">
-
-
-		<%--MENSAJES--%>
-		<%--
 		<g:if test="${flash.message}">
 			<div class="message" role="status">
-				${flash.message}
-			</div>
-		</g:if>
-		--%>
-
-		<g:if test="${flash.message}">
-			<div class="message" role="status">
-				<%-- Los mensajes se muestran de colers según sean S, E, I, W--%>
+				<%-- Los mensajes se muestran de coleres según sean S, E, I, W--%>
 				<g:if test="${flash.message_type == 'S'}">
 					<div class="alert alert-dismissible alert-success">
 				</g:if>
@@ -99,31 +90,41 @@
 				</g:else>
 				<%--<div class="alert alert-dismissible alert-info">--%>
 				<button type="button" class="close" data-dismiss="alert">×</button>
-				<p>
-					${flash.message}
-				</p>
+				<p>${flash.message}</p>
+				</div>
 			</div>
-	</div>
-	</g:if>
-
+		</g:if>
 	<g:layoutBody />
 
-	<%-- FOOTER --------------------------------------------------------------------%>
-	<div class="footer" role="contentinfo"></div>
-	<div id="spinner" class="spinner" style="display: none;">
-		<g:message code="spinner.alt" default="Loading&hellip;" />
 	</div>
 
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="collapse navbar-collapse"
-				id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">2015 &copy; dondelodejo.com</a></li>
-				</ul>
-			</div>
+
+	<%-- FOOTER --------------------------------------------------------------------%>
+<%--	<div class="footer" role="contentinfo"></div>--%>
+<%--	<div id="spinner" class="spinner" style="display: none;">--%>
+<%--		<g:message code="spinner.alt" default="Loading&hellip;" />--%>
+<%--	</div>--%>
+
+<%--	<nav class="navbar navbar-default">--%>
+<%--		<div class="container-fluid">--%>
+<%--		<div class="footer-banner">--%>
+<%--			<div class="collapse navbar-collapse"--%>
+<%--				id="bs-example-navbar-collapse-1">--%>
+<%--				<ul class="nav navbar-nav navbar-right">--%>
+<%--					<li><a href="#">2015 &copy; dondelodejo.com</a></li>--%>
+<%--				</ul>--%>
+<%--			</div>--%>
+<%--		</div>--%>
+<%--		</div>--%>
+<%--	</nav>--%>
+	<div class="footer-banner">
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+<%--			<ul class="nav navbar-nav navbar-right">--%>
+<%--				<li><a href="#">2015 &copy; dondelodejo.com</a></li>--%>
+<%--			</ul>--%>
+			<a href="#">2015 &copy; dondelodejo.com</a>
 		</div>
-	</nav>
+	</div>
 
 	<g:javascript library="application" />
 	<%--	<r:layoutResources />--%>

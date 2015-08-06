@@ -12,6 +12,7 @@ class LoginController {
 		Usuario usuario = usuarioService.buscarUsuario(email:params.get("email"),contrasenia:password)
 		if (!usuario){
 			flash.message=message(code: 'login.usuario.datosInvalidos')
+			flash.message_type = "E"
 			redirect (controller:"login", action:"index")
 		} else {
 			//aca debo decidir cual es el home, y luego enviarlo ahi.

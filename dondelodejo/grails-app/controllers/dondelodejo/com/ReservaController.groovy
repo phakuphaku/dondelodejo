@@ -118,7 +118,8 @@ class ReservaController {
 			Integer.valueOf(params.get("valor")).intValue(), 
 			params.get("detalle"))   
         if (res == resultado_ok){
-			flash.message = "La calificacion se hizo exitosamente"
+			flash.message = "La calificacion se realizo correctamente!"
+			flash.message_type = "S"
 			redirect action:session.home, id:session.homeId
         }
 	}

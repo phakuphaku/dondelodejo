@@ -11,6 +11,10 @@ class BootStrap {
 	def usuarioService
 
 	def init = { servletContext ->
+
+		/**************************************************************
+		 * ESTACIONAMIENTOS (+ubicación +cocheras)
+		 */
 		Integer numCocheras = 25
 
 		Ubicacion ubicacion1 = new Ubicacion(
@@ -40,7 +44,6 @@ class BootStrap {
 					)
 			estacionamiento1.addToCocheras(cochera1);
 		}
-
 
 		Ubicacion ubicacion2 = new Ubicacion(
 				direccionStr:"Boedo 679",
@@ -142,6 +145,12 @@ class BootStrap {
 		ubicacion:ubicacion46).save()
 		estacionamiento15.addToCocheras(new Cochera(numero:1,estado:Cochera.estadoLibre(),precioCocheraHora:36,precioCocheraFraccion:9))
 
+
+		/**************************************************************
+		 * USUARIOS
+		 */
+
+		// Usuario SOPORTE
 		Usuario usuarioSoporte= new Usuario (
 				nombre:"Super",
 				apellido:"Soporte",
@@ -149,6 +158,8 @@ class BootStrap {
 				contrasenia:usuarioService.encriptar("soporte"),
 				tipoUsuario: Usuario.getSoporte()
 				).save();
+
+		// Usuario CLIENTE
 		Usuario usuarioCliente = new Usuario (
 				nombre:"Cliente",
 				apellido:"Cualquiera",
@@ -157,7 +168,9 @@ class BootStrap {
 				tipoUsuario: Usuario.getCliente()
 				).save();
 
-		// Admin. del primer estacionamiento
+		// Usuarios ADMINISTRADORES
+
+		// Admin. del ESTACIONAMIENTO1
 		Usuario usuarioAdmin1 = new Usuario (
 				nombre:"Admin de",
 				apellido:" Rivadavia 502",
@@ -168,43 +181,71 @@ class BootStrap {
 				mostrarReservasYaCompletadas: true
 				).save();
 
-		Reserva reserva1 = new Reserva (
-				estacionamiento:1,
-				horaDeInicio: new Date(),
-				cantidadHorasReservadas:2,
-				usuario:2
-				).save();
-		Reserva reserva2 = new Reserva (
-				estacionamiento:1,
-				horaDeInicio: new Date(),
-				cantidadHorasReservadas:2,
-				usuario:2
-				).save();
-		Reserva reserva3 = new Reserva (
-				estacionamiento:1,
-				horaDeInicio: new Date(),
-				cantidadHorasReservadas:2,
-				usuario:2
-				).save();
-		Reserva reserva4 = new Reserva (
-				estacionamiento:2,
-				horaDeInicio: new Date(),
-				cantidadHorasReservadas:2,
-				usuario:2
+		// Admin. del ESTACIONAMIENTO2
+		Usuario usuarioAdmin2 = new Usuario (
+				nombre:"Admin de",
+				apellido:" Boedo 679",
+				email:"admin2@admin2.com",
+				contrasenia:usuarioService.encriptar("admin2"),
+				tipoUsuario: Usuario.getAdministrador(),
+				estacionamiento: estacionamiento2,
+				mostrarReservasYaCompletadas: true
 				).save();
 
+		// Admin. del ESTACIONAMIENTO3
+		Usuario usuarioAdmin3 = new Usuario (
+				nombre:"Admin de",
+				apellido:" Libertad 1234",
+				email:"admin3@admin3.com",
+				contrasenia:usuarioService.encriptar("admin3"),
+				tipoUsuario: Usuario.getAdministrador(),
+				estacionamiento: estacionamiento3,
+				mostrarReservasYaCompletadas: true
+				).save();
+
+		/**************************************************************
+		 * RESERVAS
+		 */
+
+		/*
+		 Reserva reserva1 = new Reserva (
+		 estacionamiento:1,
+		 horaDeInicio: new Date(),
+		 cantidadHorasReservadas:2,
+		 usuario:2
+		 ).save();
+		 Reserva reserva2 = new Reserva (
+		 estacionamiento:1,
+		 horaDeInicio: new Date(),
+		 cantidadHorasReservadas:2,
+		 usuario:2
+		 ).save();
+		 Reserva reserva3 = new Reserva (
+		 estacionamiento:1,
+		 horaDeInicio: new Date(),
+		 cantidadHorasReservadas:2,
+		 usuario:2
+		 ).save();
+		 Reserva reserva4 = new Reserva (
+		 estacionamiento:2,
+		 horaDeInicio: new Date(),
+		 cantidadHorasReservadas:2,
+		 usuario:2
+		 ).save();
+		 */
+
 		/*Calificacion calificcion1 = new Calificacion(valor:4,detalle:"Todo en orden!");
-		reserva1.calificacionDelClienteAlEstacionamiento=calificcion1
-		reserva1.calificarCliente()
-		reserva1.save()
-		Calificacion calificcion2 = new Calificacion(valor:1,detalle:"Me echaron porque ven&iacutea una caravana de Audis!");
-		reserva2.calificacionDelClienteAlEstacionamiento=calificcion2
-		reserva2.calificarCliente()
-		reserva2.save()
-		Calificacion calificcion3 = new Calificacion(valor:1,detalle:"El Tipo es un pel###### que me colg&oacute 5 veces y quiere que lo felicite");
-		reserva2.calificacionDelEstacionamientoAlCliente=calificcion3
-		reserva2.completar()
-		reserva2.save()*/
+		 reserva1.calificacionDelClienteAlEstacionamiento=calificcion1
+		 reserva1.calificarCliente()
+		 reserva1.save()
+		 Calificacion calificcion2 = new Calificacion(valor:1,detalle:"Me echaron porque ven&iacutea una caravana de Audis!");
+		 reserva2.calificacionDelClienteAlEstacionamiento=calificcion2
+		 reserva2.calificarCliente()
+		 reserva2.save()
+		 Calificacion calificcion3 = new Calificacion(valor:1,detalle:"El Tipo es un pel###### que me colg&oacute 5 veces y quiere que lo felicite");
+		 reserva2.calificacionDelEstacionamientoAlCliente=calificcion3
+		 reserva2.completar()
+		 reserva2.save()*/
 	}
 
 	def destroy = {

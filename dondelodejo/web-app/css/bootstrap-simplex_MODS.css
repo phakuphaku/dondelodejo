@@ -6,3 +6,28 @@
 .table-clickable:hover {
 	cursor: pointer;
 }
+
+/* Estilos sueltos (NO BOOTSTRAP) ************************************/
+.stars {
+ 	font-size: 13px;
+	color: yellow;
+	text-shadow: black 0px 0px 6px;
+}
+td .autowidth {
+	white-space: nowrap;
+}
+
+.footer-banner{
+	width: 100%;
+	height: 60px;
+	margin-top: 20px;
+	padding-top: 75px;
+	background: url("/dondelodejo/images/banner-bottom.png") top repeat-x;
+	text-align: center;
+}
+
+.logo-m{
+	width: 100%;
+	height: 150px;
+	background: url("/dondelodejo/images/logo-m.png") center no-repeat;
+}
